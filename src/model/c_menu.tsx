@@ -12,6 +12,7 @@ export default class CMenu extends CObj {
     this.type = 'menu'
     this.listType = ltype
   }
+  /*
   //отрисовка объекта
   render() {
     const $el = document.createElement('div')
@@ -33,11 +34,11 @@ export default class CMenu extends CObj {
   renderList() {
     const $li = document.createElement('div')
     return $li
-  }
+  }*/
 }
 export class CMenuShop extends CMenu {
   // отрисовка списка
-  renderList() {
+  /*  renderList() {
     const $li = document.createElement('div')
     console.log(shopList)
     console.log(this.listType)
@@ -50,13 +51,13 @@ export class CMenuShop extends CMenu {
       })
     }
     return $li
-  }
+  }*/
 }
 export class CMenuAction extends CMenu {
   // отрисовка списка
-  renderList() {
+  /*  renderList() {
     const $li = document.createElement('div')
-    shopList[this.listType].forEach((el) => {
+    shopList.forEach((el) => {
       const obj = el.o
       if (obj.owned) {
         $li.appendChild(el.o.render())
@@ -64,4 +65,5 @@ export class CMenuAction extends CMenu {
     })
     return $li
   }
+*/
 }

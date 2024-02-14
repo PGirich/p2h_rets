@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
+import VShopList from './view/v_onsalelist'
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
       <tbody>
         <tr>
           <td id="panelStat">stat creating in process...</td>
+          <VShopList />
           <td id="panelGeneral">actions creating in process...</td>
           <td id="panelLog">log creating in process...</td>
         </tr>
