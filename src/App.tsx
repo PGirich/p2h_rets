@@ -1,12 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import logo from './logo.svg'
+import './App.css'
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} className="App-logo" alt="logo" width="100px" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -16,11 +16,31 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React!
         </a>
       </header>
-    </div>
-  );
-}
+      <table className="mainUI">
+      <thead>
+        <tr>
+          <td id="captionStat">stat</td>
+          <td id="captionMenu">menu here</td>
+          <td id="captionLog">event history</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="panelStat">stat creating in process...</td>
+          <td id="panelGeneral">actions creating in process...</td>
+          <td id="panelLog">log creating in process...</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th id="panelFoot" colSpan={3}>The table footer</th>
+        </tr>
+      </tfoot>
+    </table>
 
-export default App;
+    </div>
+  )
+}
