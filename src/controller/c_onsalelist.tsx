@@ -1,5 +1,5 @@
-import { OnSale, oList, iList, shopList, actList } from '../model/m_data.js'
-import CObj from '../model/m_obj.js'
+import { OnSale, oList, iList, shopList, actList } from '../model/m_data'
+import CObj from '../model/m_obj'
 
 export interface OnSaleListEntry {
   o: CObj

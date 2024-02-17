@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.inputFilter {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+div {
+  border: 1px solid red;
+  float: left;
+}

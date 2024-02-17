@@ -1,13 +1,13 @@
 import React from 'react'
+import VObj from '../view/v_obj'
 import { OnSaleListEntry, getOnSaleList } from '../controller/c_onsalelist'
-//import './?????.css'
 
-export default function VShopList() {
+export default function VOnSaleList() {
   return (
-    <div className="VShopList">
-      <div>Places</div>
+    <div className="VOnSaleList">
+      <div>Items</div>
       {getOnSaleList('place_villageshop').map((osl, i) => (
-        <Object/>
+        <VObj />
       ))}
     </div>
   )
