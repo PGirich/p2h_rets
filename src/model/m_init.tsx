@@ -1,5 +1,6 @@
 import CObj from './m_obj.js'
-import CMap from './m_map.js'
+import { oList } from './m_data.js'
+import CPlace from './m_place.js'
 import CShop from './m_shop.js'
 import CAction from './m_action.js'
 import { CMenuShop, CMenuAction } from './c_menu.jsx'
@@ -8,47 +9,49 @@ import { CMenuShop, CMenuAction } from './c_menu.jsx'
 
 export default function loadMetaData() {
   console.log('Start metadata loading...')
+  let mo: any
 
-  // меню
-  let mo : any = new CMenuShop(
-    'menu_chart',
-    'Travel',
-    'Known places, which you able to reach...',
-    'chart' // показывает места доступные для путешествия
-  ).unlock('menu')
-  mo = new CMenuShop(
-    'menu_shop',
-    'Shops',
-    'You can get things and knowledge here...',
-    'shop' // показывает доступные магазины
-  ).unlock('menu')
-  mo = new CMenuAction(
-    'menu_action',
-    'Tasks',
-    'You can select task here to do...',
-    'inborn' // показывает доступные для выполнения действия
-  ).unlock('menu')
+  // начало истории - маленькая деревня, делать тут нечего
 
-  // доступные места
-  mo = new CMap('chart_hero', 'You', 'I am here everywhere everytime').unlock(
-    'chart'
-  )
-  mo = new CMap(
-    'chart_village',
+  mo = new CPlace(
+    'place_village',
     'Small village',
     'Small village, in the far edge of the world'
-  ).unlock('chart')
-  mo = new CMap('chart_forest', 'Forest', 'Forest near small village').unlock(
-    'chart'
-  )
+  ).unlock()
+  mo = new CPlace(
+    'place_forest',
+    'Forest',
+    'Forest near small village'
+  ).unlock()
+  mo = new CPlace('place_river', 'River', 'River near small village').unlock()
+  mo = new CPlace('place_mount', 'Mount', 'Mount near small village').unlock()
 
-  // доступные магазины
   mo = new CShop(
-    'shop_places',
-    'Available places',
-    'You know, how to get there',
-    ''
+    'shop_villageshop',
+    'Village trader',
+    'Local trader sells junk to fellow peasants',
+    'place_villageshop'
+  ).unlock()
+  mo.picture = './place.villageshop.png'
+  mo = new CShop(
+    'shop_witchshop',
+    'Witch hut',
+    'Local witch sells herb in her small hut',
+    'place_forest'
   ).unlock('shop')
+  mo.picture = './place.witchshop.png'
+
+  mo = new CAction(
+    'action_cleaning',
+    'Cleaning job',
+    'You can get some charity for cleaninf street from random housewife'
+  ).unlock('place_village')
+
+  mo = new CPlace(
+    'place_innerworld',
+    'Inner world',
+    'In meditation you get here everytime'
+  )
 
   // ====================================================
   // actions

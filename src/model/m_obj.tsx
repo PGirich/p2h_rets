@@ -7,6 +7,7 @@ export default class CObj {
   name: string // код объекта
   caption: string // заголовок
   comment: string // описание
+  picture: string | undefined // имя файла картинки
   countable: boolean = false // количество
   condBuy = [] // условия покупки
   condUse = [] // условия доступности
@@ -21,11 +22,22 @@ export default class CObj {
     this.name = pname
     this.caption = pcaption
     this.comment = pcomment
+    this.picture = undefined
     oList.set(this.name, this)
   }
 
   // разблокировать и на прилавок в магазин
-  unlock(pshop: string, pcnt: number = 1) {
+  // если не указан магазин - значит в инвентарь
+  unlock(pshop: string = '', pcnt: number = 1) {
+    // если не указан магазин - значит в инвентарь
+    if(pshop===''){
+      const myItem = iList.get(this.name) || { o: this, cnt: 0 }
+      myItem.cnt += 1
+      iList.set(this.name, myItem)
+      this.unlocked = true
+      this.owned = true
+      return true
+    }
     // нет прилавка - создадим
     let shop = shopList.get(pshop)
     if (!shop) {
@@ -72,7 +84,7 @@ export default class CObj {
     // нет товара - поместим
     const myItem = iList.get(this.name) || { o: this, cnt: 0 }
     myItem.cnt += pcnt
-    iList.set(this.name, item)
+    iList.set(this.name, myItem)
     this.unlocked = true
     this.owned = true
     return true
