@@ -1,6 +1,6 @@
-import CObj from './m_obj.js'
-import CPlace from './m_place.js'
-import { oList, iList, shopList, actList } from './m_data.js'
+import CObj from './m_obj'
+import CPlace from './m_place'
+import { oList, iList, shopList, actList } from './m_data'
 
 export default class CShop extends CPlace {
   constructor(

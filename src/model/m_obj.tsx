@@ -1,4 +1,4 @@
-import { oList, iList, shopList, OnSale, CObjCnt, actList } from './m_data.js'
+import { oList, iList, shopList, OnSale, CObjCnt, actList } from './m_data'
 
 export default class CObj {
   type: string // тип объекта: shop - магазин, map - карта локаций, loot - поле боя,
@@ -8,7 +8,8 @@ export default class CObj {
   caption: string // заголовок
   comment: string // описание
   picture: string | undefined // имя файла картинки
-  countable: boolean = false // количество
+  countable: boolean = false // количество мб
+  count: number = 0 // количество
   condBuy = [] // условия покупки
   condUse = [] // условия доступности
   resUse = [] // результаты действия
@@ -30,13 +31,12 @@ export default class CObj {
   // если не указан магазин - значит в инвентарь
   unlock(pshop: string = '', pcnt: number = 1) {
     // если не указан магазин - значит в инвентарь
-    if(pshop===''){
-      const myItem = iList.get(this.name) || { o: this, cnt: 0 }
-      myItem.cnt += 1
-      iList.set(this.name, myItem)
+    if (pshop === '') {
+      this.count = 1 + (this.countable ? this.count : 0)
+      iList.set(this.name, this)
       this.unlocked = true
       this.owned = true
-      return true
+      return this
     }
     // нет прилавка - создадим
     let shop = shopList.get(pshop)
@@ -57,11 +57,19 @@ export default class CObj {
     return this
   }
   // убрать с прилавка магазина
-  lock(pshop: string) {
+  lock(pshop: string = '') {
+    // если не указан магазин - значит в инвентарь
+    if (pshop === '') {
+      this.count = 0
+      iList.delete(this.name)
+      this.unlocked = false
+      this.owned = false
+      return this
+    }
+    // удаляем из магазина, но не из инвентаря!
     const shop = shopList.get(pshop)
     if (!shop) return this
     shop.delete(this.name)
-    this.unlocked = false
   }
   // купить
   buy(pshop: string, pcnt = 1): boolean {
@@ -82,9 +90,8 @@ export default class CObj {
       shop.delete(this.name)
     }
     // нет товара - поместим
-    const myItem = iList.get(this.name) || { o: this, cnt: 0 }
-    myItem.cnt += pcnt
-    iList.set(this.name, myItem)
+    this.count = 1 + (this.countable ? this.count : 0)
+    iList.set(this.name, this)
     this.unlocked = true
     this.owned = true
     return true
@@ -93,21 +100,4 @@ export default class CObj {
     return false
   }
 
-  //отрисовка объекта
-  render() {
-    // количество
-    let cnt = ''
-    if (this.countable) {
-      cnt = ' : ' + iList.get(this.name)?.cnt
-    }
-    // отрисовка
-    const $el = document.createElement(
-      `<div class="${this.type}" id="${this.name}" title="${this.comment}">${
-        this.caption + cnt
-      }</div>`
-    )
-    //
-
-    return $el
-  }
 }

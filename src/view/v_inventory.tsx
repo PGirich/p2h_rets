@@ -1,18 +1,33 @@
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { iList } from '../model/m_data'
 import VObj from './v_obj'
 import CObj from '../model/m_obj'
 
-interface propsVInventory {
-  children: React.ReactNode
-}
 export default function VInventory() {
+  const [filter, setFilter] = useState('')
+  const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFilter(e.target.value.toUpperCase())
+  }
+  function isFiltered(value: CObj) {
+    return value.caption.toUpperCase().includes(filter)
+  }
   return (
     <div className="VInventory">
-      <div>On Sale....</div>
-      { Array.from(iList.values()).map(key => {
-              <VObj obj={key} />
-      } ) }
+      <label htmlFor="inputFilter">Filter:</label>
+      <input
+        type="text"
+        id="inputFilter"
+        className="inputFilter"
+        value={filter}
+        onChange={handleFilterChange}
+      />
+      <label>     Total:{iList.size.toString()}</label>
+      <br></br>
+      {Array.from(iList.values())
+        .filter(isFiltered)
+        .map((o) => (
+          <VObj obj={o} />
+        ))}
     </div>
   )
 }

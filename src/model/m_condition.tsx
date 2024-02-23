@@ -1,5 +1,5 @@
-import CObj from './m_obj.js'
-import { oList, iList, shopList, actList, CObjCnt } from './m_data.js'
+import CObj from './m_obj'
+import { oList, iList, shopList, actList, CObjCnt } from './m_data'
 
 // структура для указания условия
 export interface ObjConditionData {
@@ -21,9 +21,9 @@ export interface ObjChangeData {
 const ObjConditionCheck = (cd: ObjConditionData): boolean => {
   cd.result = false
   if (!cd.specfn) {
-    let p: CObjCnt | undefined = iList.get(cd.prop)
+    let p: CObj | undefined = iList.get(cd.prop)
     if (!p) return false
-    let val = p.cnt
+    let val = p.count
     switch (cd.op) {
       case '>':
         if (val <= cd.val) return false
@@ -53,9 +53,9 @@ export const ObjConditionsCheck = (cda: ObjConditionData[]): boolean => {
 // проверка возможности применения одного изменения
 const ObjChangeCheck = (cd: ObjChangeData): boolean => {
   cd.result = false
-  let p: CObjCnt | undefined = iList.get(cd.prop)
+  let p: CObj | undefined = iList.get(cd.prop)
   if (!p) return false
-  if (p.cnt < cd.cost) return false
+  if (p.count < cd.cost) return false
   cd.result = true
   return true
 }
@@ -69,7 +69,7 @@ export const ObjChangesApply = (cda: ObjChangeData[]): boolean => {
   if (!res) return false
   cda.forEach((cd) => {
     let p = iList.get(cd.prop)
-    p!.cnt -= cd.cost
+    p!.count -= cd.cost
   })
   return true
 }

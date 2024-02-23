@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.VObj {
+  border: 1px;
+  border-radius: 5px;
+  list-style: none;
+  padding: 10px;
+  margin: 10px 10px 10px 10px;
+  width: 200px;
+  background: #fff;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s;
+}
+.VObj:hover {
+  transform: scale(1.1);
+  z-index: 5;
+  background: #25bcff;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  opacity: 1;
+}
+.VObjImg {
+  float: left;
+  width: 50px;
+  margin: 2px 4px 2px 2px;
+  border-radius: 5px;
+}
+.VObjText {
+  width: 140px;
+  border: none;
+}
+.VObj h1 {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  border-bottom: 1px solid gray;
+}
+.VObj h2 {
+  text-align: left;
+  font-size: 9px;
+  font-weight: 100;
+  line-height: normal;
+  border-bottom: 1px dashed gray;
+}
+.VObj h3 {
+  text-align: center;
+  font-size: 7px;
+  font-weight: 100;
+  line-height: normal;
+}
+

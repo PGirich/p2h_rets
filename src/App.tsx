@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 import VOnSaleList from './view/v_onsalelist'
 import VHeader from './view/v_header'
@@ -10,6 +10,7 @@ import VTabsSection from './view/v_tabssection'
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState('onsalelist')
+  {/*const [] = useEffect() */}
   return (
     <div className="App">
       <VHeader />
@@ -32,7 +33,6 @@ export default function App() {
       {currentTab === 'inventory' && (
         <>
           <VInventory />
-          <VObj />
         </>
       )}
     </div>

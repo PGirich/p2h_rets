@@ -7,7 +7,7 @@ export default function VOnSaleList() {
     <div className="VOnSaleList">
       <div>Items</div>
       {getOnSaleList('place_villageshop').map((osl, i) => (
-        <VObj />
+        <VObj obj={osl.o} />
       ))}
     </div>
   )

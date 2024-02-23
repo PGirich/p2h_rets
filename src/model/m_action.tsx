@@ -1,11 +1,11 @@
-import CObj from './m_obj.js'
-import { oList, iList, shopList, actList } from './m_data.js'
+import CObj from './m_obj'
+import { oList, iList, shopList, actList } from './m_data'
 import {
   ObjConditionData,
   ObjChangeData,
   ObjConditionsCheck,
   ObjChangesApply,
-} from './m_condition.js'
+} from './m_condition'
 
 export default class CAction extends CObj {
   // мета

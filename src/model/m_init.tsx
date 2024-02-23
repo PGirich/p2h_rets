@@ -1,8 +1,8 @@
-import CObj from './m_obj.js'
-import { oList } from './m_data.js'
-import CPlace from './m_place.js'
-import CShop from './m_shop.js'
-import CAction from './m_action.js'
+import CObj from './m_obj'
+import { oList } from './m_data'
+import CPlace from './m_place'
+import CShop from './m_shop'
+import CAction from './m_action'
 import { CMenuShop, CMenuAction } from './c_menu.jsx'
 
 //////////////////////////////////////
