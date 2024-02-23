@@ -1,4 +1,13 @@
-import { oList, iList, shopList, OnSale, CObjCnt, actList } from './m_data'
+import {
+  currentPlace,
+  oList,
+  iList,
+  shopList,
+  OnSale,
+  CObjCnt,
+  actList,
+} from './m_data'
+import CPlace from './m_place'
 
 export default class CObj {
   type: string // тип объекта: shop - магазин, map - карта локаций, loot - поле боя,
@@ -100,4 +109,22 @@ export default class CObj {
     return false
   }
 
+  actionDispatch(action: string): void {
+    switch (action) {
+      case 'unlock':
+        this.unlock()
+        break
+      case 'buy':
+        this.buy(CPlace.currentPlace)
+        break
+      case 'perform':
+        this.sell(CPlace.currentPlace)
+        break
+      case 'travel':
+        if (this instanceof CPlace) {
+          (this as CPlace).travel(this.name)
+        } 
+        break
+    }
+  }
 }

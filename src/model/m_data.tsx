@@ -11,3 +11,4 @@ export const oList = new Map<string, CObj>() // метаданные id - объ
 export const iList = new Map<string, CObj>() // в наличии id объекта - {объект, кол-во}
 export const shopList = new Map<string, OnSale>() // в магазине id магазина - {id объект, кол-во}
 export const actList = new Array<CAction>() // список выполняемых действий
+export let currentPlace:string

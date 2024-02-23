@@ -7,7 +7,7 @@ export default function VOnSaleList() {
     <div className="VOnSaleList">
       <div>Items</div>
       {getOnSaleList('place_villageshop').map((osl, i) => (
-        <VObj obj={osl.o} />
+        <VObj obj={osl.o} action="buy" isActive={true} />
       ))}
     </div>
   )

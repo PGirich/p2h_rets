@@ -2,9 +2,16 @@ import React, { ChangeEvent, useState } from 'react'
 import { iList } from '../model/m_data'
 import VObj from './v_obj'
 import CObj from '../model/m_obj'
+import CPlace from '../model/m_place'
 
-export default function VInventory() {
+interface propsVObjList {
+  cbGetObjList: () => Array<CObj> // получение массива объектов
+  action: string // действие над объектами при нажатии в списке
+}
+export default function VObjList(props: propsVObjList) {
+  const [selected, setSelected] = useState('')
   const [filter, setFilter] = useState('')
+  const [objList, setObjList] = useState(new Array<CObj>())
   const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value.toUpperCase())
   }
@@ -12,7 +19,7 @@ export default function VInventory() {
     return value.caption.toUpperCase().includes(filter)
   }
   return (
-    <div className="VInventory">
+    <div className="VObjList">
       <label htmlFor="inputFilter">Filter:</label>
       <input
         type="text"
@@ -21,12 +28,16 @@ export default function VInventory() {
         value={filter}
         onChange={handleFilterChange}
       />
-      <label>     Total:{iList.size.toString()}</label>
+      <label> Total:{iList.size.toString()}</label>
       <br></br>
       {Array.from(iList.values())
         .filter(isFiltered)
         .map((o) => (
-          <VObj obj={o} />
+          <VObj
+            obj={o}
+            action={props.action}
+            isActive={o.name === CPlace.currentPlace}
+          />
         ))}
     </div>
   )

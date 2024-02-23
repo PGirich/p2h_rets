@@ -23,6 +23,9 @@
   color: #fff;
   opacity: 1;
 }
+.VObjSelected {
+  background: #9bb0ba;
+}
 .VObjImg {
   float: left;
   width: 50px;
@@ -30,7 +33,7 @@
   border-radius: 5px;
 }
 .VObjText {
-  width: 140px;
+  width: 195px;
   border: none;
 }
 .VObj h1 {
