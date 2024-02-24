@@ -18,7 +18,7 @@ export default function VObj(props: propsVObj) {
       }
       onClick={()=>obj.actionDispatch(props.action)}
     >
-      <img className={classes.VObjImg} src={obj.picture} width="50px" />
+      <img className={classes.VObjImg} src={obj.picture} />
       <div className={classes.VObjText}>
         <h1>{obj.caption}</h1>
         <h2>{obj.comment}</h2>

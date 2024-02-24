@@ -32,14 +32,12 @@ export default function loadMetaData() {
     'Local trader sells junk to fellow peasants',
     'place_villageshop'
   ).unlock()
-  mo.picture = './place.villageshop.png'
   mo = new CShop(
     'shop_witchshop',
     'Witch hut',
     'Local witch sells herb in her small hut',
     'place_forest'
   ).unlock('shop')
-  mo.picture = './place.witchshop.png'
 
   mo = new CAction(
     'action_cleaning',

@@ -1,16 +1,72 @@
+/*
 .VTabButton {
-  color: #fff; /* цвет текста */
-  text-decoration: none; /* убирать подчёркивание у ссылок */
-  user-select: none; /* убирать выделение текста */
-  background: rgb(164, 192, 161); /* фон кнопки */
-  padding: 0.7em 1.5em; /* отступ от текста */
-  outline: none; /* убирать контур в Mozilla */
+  display:inline;
+  color: #fff;
+  text-decoration: none;
+  user-select: none; 
+  background: rgb(164, 192, 161);
+  padding: 0.4em 1.1em;
+  outline: none; 
   margin: 2px;
+  min-width: 90px;
 }
 .VTabButton:hover {
   opacity: 70%;
-} /* при наведении курсора мышки */
+} 
 
 .VTabButtonActive {
   background: rgb(152, 15, 0);
-} /* при нажатии */
+} 
+*/
+.VTabButton {
+  position: relative;
+  display: inline-block;
+  min-width: 100px;
+  font-size: 18px;
+  font-weight: bold;
+  color: hsl(88, 72%, 7%);
+  text-shadow: rgba(255,255,255,.5) 0 -1px 0, rgba(0,0,0,.2) 0 .18em .15em;
+  text-decoration: none;
+  user-select: none;
+  margin: .3em;
+  padding: .15em .6em .1em .6em;
+  border-radius: 8px;
+  border-left: none;
+  border-right: none;
+  border-top: 1px solid rgba(255,255,255,.1);
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  outline: none;
+  background: #70b9cf radial-gradient(rgba(255,255,255,0), rgba(255,255,255,.5));
+  box-shadow:
+   inset rgba(255,255,255,.6) 0 .3em .3em,
+   inset rgba(0,0,0,.2) 0 -.1em .3em,
+   rgba(0,0,0,.4) 0 .1em 1px,
+   rgba(0,0,0,.3) 0 .2em 6px;
+  transition: background .2s ease-in-out;
+}
+.VTabButton:hover {
+  background-color: hsl(69, 77%, 59%);
+}
+.VTabButton:active {
+  top: .1em;
+  color: rgba(211, 210, 154, 0.9);
+  text-shadow: rgba(0,0,0,.2) 0 1px 2px;
+
+}
+.VTabButton:after {
+  content:  "";
+  position:  absolute; 
+  width:   90%;
+  height:  60%;
+  top:   0;
+  left:   5%;    
+  border-radius:    .5em .5em 1em 1em / .5em .5em 2em 2em;
+  background-image: linear-gradient(rgba(255,255,255,.55), rgba(255,255,255,.3)); 
+}
+.VTabButton:active:after {
+  opacity: .6;
+}
+.VTabButtonActive {
+  background: rgb(17, 138, 236);
+  color: hsl(66, 45%, 91%);
+} 

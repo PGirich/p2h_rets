@@ -1,33 +1,23 @@
 import React, { ReactElement } from 'react'
+import classes from './v_tabssection.module.css'
 import VTabButton from './v_tabbutton'
 
 export default function VTabsSection(props: {
   currentTab: string
+  tabs: string[]
   onChange: (tab: string) => void
 }): ReactElement {
   return (
-    <section className="VTabsSection" style={{ marginBottom: '1rem' }}>
-      <VTabButton
-        key={'actionlist'}
-        isActive={props.currentTab === 'actionlist'}
-        onClick={() => props.onChange('actionlist')}
-      >
-        Actions
-      </VTabButton>
-      <VTabButton
-        key={'onsalelist'}
-        isActive={props.currentTab === 'onsalelist'}
-        onClick={() => props.onChange('onsalelist')}
-      >
-        Available
-      </VTabButton>
-      <VTabButton
-        key={'inventory'}
-        isActive={props.currentTab === 'inventory'}
-        onClick={() => props.onChange('inventory')}
-      >
-        Inventory
-      </VTabButton>
-    </section>
+    <nav className={classes.VTabsSection} style={{ marginBottom: '1rem' }}>
+      {props.tabs.map((t) => (
+        <VTabButton
+          key={t}
+          isActive={props.currentTab === t}
+          onClick={() => props.onChange(t)}
+        >
+          {t}
+        </VTabButton>
+      ))}
+    </nav>
   )
 }

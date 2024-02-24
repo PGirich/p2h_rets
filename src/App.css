@@ -1,4 +1,6 @@
-
+div{
+  border: none 1px;
+}
 .inputFilter {
   border: 1px solid #ccc;
   border-radius: 5px;

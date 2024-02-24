@@ -5,6 +5,7 @@
 }
 
 .VObj {
+  display: inline-flex;
   border: 1px;
   border-radius: 5px;
   list-style: none;
@@ -14,6 +15,7 @@
   background: #fff;
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
   transition: transform 0.5s;
+  user-select: none;
 }
 .VObj:hover {
   transform: scale(1.1);
@@ -27,13 +29,11 @@
   background: #9bb0ba;
 }
 .VObjImg {
-  float: left;
   width: 50px;
   margin: 2px 4px 2px 2px;
   border-radius: 5px;
 }
 .VObjText {
-  width: 195px;
   border: none;
 }
 .VObj h1 {

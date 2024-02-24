@@ -32,7 +32,7 @@ export default class CObj {
     this.name = pname
     this.caption = pcaption
     this.comment = pcomment
-    this.picture = undefined
+    this.picture = './'+pname+'.png'
     oList.set(this.name, this)
   }
 

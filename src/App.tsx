@@ -16,37 +16,47 @@ export default function App() {
   }
   return (
     <div className="App">
+      {/* заголовок */}
       <VHeader />
       <VTabsSection
         currentTab={currentTab}
+        tabs={['travel', 'buy', 'perform', 'equip']}
         onChange={(tab: string) => setCurrentTab(tab)}
       />
-      <VObjList
-        cbGetObjList={() => Array.from(iList.values())}
-        action={'travel'}
-      />
-      {currentTab === 'actionlist' && (
-        <>
-          <VPlaceInfo />
-          <VActionList />
-        </>
+      {/* описание местонахождения */}
+      <VPlaceInfo />
+      {/* текущие объекты */}
+      {currentTab === 'travel' && (
+        <VObjList
+          cbGetObjList={() =>
+            Array.from(iList.values()).filter((o) => o.type === 'place')
+          }
+          action={'travel'}
+        />
       )}
-      {currentTab === 'onsalelist' && (
-        <>
-          <VPlaceInfo />
-          <VObjList
-            cbGetObjList={() => Array.from(iList.values())}
-            action={'buy'}
-          />
-        </>
+      {currentTab === 'buy' && (
+        <VObjList
+          cbGetObjList={() =>
+            Array.from(oList.values()).filter((o) => !o.unlocked)
+          }
+          action={'buy'}
+        />
+      )}{' '}
+      {currentTab === 'perform' && (
+        <VObjList
+          cbGetObjList={() =>
+            Array.from(iList.values()).filter((o) => o.type === 'action')
+          }
+          action={'perform'}
+        />
       )}
-      {currentTab === 'inventory' && (
-        <>
-          <VObjList
-            cbGetObjList={() => Array.from(oList.values())}
-            action={'equip'}
-          />
-        </>
+      {currentTab === 'equip' && (
+        <VObjList
+          cbGetObjList={() =>
+            Array.from(iList.values()).filter((o) => o.type === 'wear')
+          }
+          action={'equip'}
+        />
       )}
     </div>
   )
