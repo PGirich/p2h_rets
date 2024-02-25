@@ -1,24 +1,16 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
+import classes from './v_placeinfo.module.css'
+import CPlace from '../model/m_place'
+import { oList } from '../model/m_data'
 
 export default function VPlaceInfo() {
-  const [filter, setFilter] = useState('')
-  const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFilter(e.target.value)
-  }
+  const [currentPlace, setCurrentPlace] = useState(oList.get('place_village')!)
+
   return (
-    <div className="VPlaceInfo">
-      <div>Places:</div>
-      <form>
-        <label htmlFor="inputFilter">Filter:</label>
-        <input
-          type="text"
-          id="inputFilter"
-          className="inputFilter"
-          value={filter}
-          onChange={handleFilterChange}
-        />
-      </form>
-      {filter}
+    <div className={classes.VPlaceInfo}>
+      <img className={classes.VPlaceInfoImg} src={currentPlace.picture} />
+      <h1>{currentPlace.caption}</h1>
+      <h2>{currentPlace.comment}</h2>{' '}
     </div>
   )
 }
