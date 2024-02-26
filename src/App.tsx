@@ -8,6 +8,7 @@ import VObjList from './view/v_objlist'
 import VTabsSection from './view/v_tabssection'
 import { iList, oList } from './model/m_data'
 import VLog from './view/v_log'
+import { HeroContextProvider } from './context/hero.contextprovaider'
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState('onsalelist')
@@ -17,50 +18,52 @@ export default function App() {
   return (
     <div className="App">
       {/* заголовок */}
-      <VHeader />
-      <VTabsSection
-        currentTab={currentTab}
-        tabs={['travel', 'buy', 'perform', 'equip']}
-        onChange={(tab: string) => setCurrentTab(tab)}
-      />
-      {/* описание местонахождения */}
-      <VPlaceInfo />
-      {/* описание местонахождения */}
-      <VShedule />
-      {/* текущие объекты */}
-      {currentTab === 'travel' && (
-        <VObjList
-          cbGetObjList={() =>
-            Array.from(iList.values()).filter((o) => o.type === 'place')
-          }
-          action={'travel'}
+      <HeroContextProvider>
+        <VHeader />
+        <VTabsSection
+          currentTab={currentTab}
+          tabs={['travel', 'buy', 'perform', 'equip']}
+          onChange={(tab: string) => setCurrentTab(tab)}
         />
-      )}
-      {currentTab === 'buy' && (
-        <VObjList
-          cbGetObjList={() =>
-            Array.from(oList.values()).filter((o) => !o.unlocked)
-          }
-          action={'buy'}
-        />
-      )}{' '}
-      {currentTab === 'perform' && (
-        <VObjList
-          cbGetObjList={() =>
-            Array.from(iList.values()).filter((o) => o.type === 'action')
-          }
-          action={'perform'}
-        />
-      )}
-      {currentTab === 'equip' && (
-        <VObjList
-          cbGetObjList={() =>
-            Array.from(iList.values()).filter((o) => o.type === 'wear')
-          }
-          action={'equip'}
-        />
-      )}
-      <VLog />
+        {/* описание местонахождения */}
+        <VPlaceInfo />
+        {/* описание местонахождения */}
+        <VShedule />
+        {/* текущие объекты */}
+        {currentTab === 'travel' && (
+          <VObjList
+            cbGetObjList={() =>
+              Array.from(iList.values()).filter((o) => o.type === 'place')
+            }
+            action={'travel'}
+          />
+        )}
+        {currentTab === 'buy' && (
+          <VObjList
+            cbGetObjList={() =>
+              Array.from(oList.values()).filter((o) => !o.unlocked)
+            }
+            action={'buy'}
+          />
+        )}{' '}
+        {currentTab === 'perform' && (
+          <VObjList
+            cbGetObjList={() =>
+              Array.from(iList.values()).filter((o) => o.type === 'action')
+            }
+            action={'perform'}
+          />
+        )}
+        {currentTab === 'equip' && (
+          <VObjList
+            cbGetObjList={() =>
+              Array.from(iList.values()).filter((o) => o.type === 'wear')
+            }
+            action={'equip'}
+          />
+        )}
+        <VLog />
+      </HeroContextProvider>
     </div>
   )
 }
