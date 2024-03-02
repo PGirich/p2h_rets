@@ -8,17 +8,14 @@ import VObjList from './view/v_objlist'
 import VTabsSection from './view/v_tabssection'
 import { iList, oList } from './model/m_data'
 import VLog from './view/v_log'
-import { HeroContextProvider } from './context/hero.contextprovaider'
+import LogProvider from './view/v_log.context'
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState('onsalelist')
-  {
-    /*const [] = useEffect() */
-  }
   return (
-    <div className="App">
-      {/* заголовок */}
-      <HeroContextProvider>
+    <LogProvider>
+      <div className="App">
+        {/* заголовок */}
         <VHeader />
         <VTabsSection
           currentTab={currentTab}
@@ -63,7 +60,7 @@ export default function App() {
           />
         )}
         <VLog />
-      </HeroContextProvider>
-    </div>
+      </div>
+    </LogProvider>
   )
 }

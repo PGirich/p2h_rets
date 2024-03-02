@@ -1,3 +1,4 @@
+import { LogTypes, useLog } from '../view/v_log.context'
 import {
   currentPlace,
   oList,
@@ -32,7 +33,7 @@ export default class CObj {
     this.name = pname
     this.caption = pcaption
     this.comment = pcomment
-    this.picture = './'+pname+'.png'
+    this.picture = './' + pname + '.png'
     oList.set(this.name, this)
   }
 
@@ -122,8 +123,8 @@ export default class CObj {
         break
       case 'travel':
         if (this instanceof CPlace) {
-          (this as CPlace).travel(this.name)
-        } 
+          ;(this as CPlace).travel(this.name)
+        }
         break
     }
   }

@@ -1,3 +1,4 @@
+/*
 export const useCreateHeroContext = function (props) {
   const [currentPlace, setCurrentPlace] = useState(
     props.currentPlace || 'place_village'
@@ -12,3 +13,4 @@ export const useCreateHeroContext = function (props) {
     toggleTest,
   }
 }
+*/

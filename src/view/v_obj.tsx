@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { MouseEventHandler, useState } from 'react'
 import CObj from '../model/m_obj'
 import classes from './v_obj.module.css'
+import { LogTypes, useLog } from './v_log.context'
 
 interface propsVObj {
   obj: CObj
@@ -8,7 +9,23 @@ interface propsVObj {
   isActive: boolean
 }
 export default function VObj(props: propsVObj) {
+  const appLog = useLog()
+
   const obj = props.obj
+  const handleObjOnClick: MouseEventHandler = (e) => {
+    obj.actionDispatch(props.action)
+    appLog.toLog({
+      type:
+        props.action === 'unlock'
+          ? LogTypes.TYPE_UNLOCK
+          : LogTypes.TYPE_ACTIONS,
+      obj: obj,
+      str: props.action,
+      when: Date.now(),
+      val: 1,
+    })
+  }
+
   return (
     <div
       className={
@@ -16,7 +33,7 @@ export default function VObj(props: propsVObj) {
           ? `${classes.VObj} ${classes.VObjActive}`
           : `${classes.VObj}`
       }
-      onClick={()=>obj.actionDispatch(props.action)}
+      onClick={handleObjOnClick}
     >
       <img className={classes.VObjImg} src={obj.picture} />
       <div className={classes.VObjText}>
