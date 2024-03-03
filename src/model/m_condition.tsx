@@ -1,5 +1,5 @@
 import CObj from './m_obj'
-import { oList, iList, shopList, actList, CObjCnt } from './m_data'
+import { iList } from './m_data'
 
 // структура для указания условия
 export interface ObjConditionData {

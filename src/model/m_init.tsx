@@ -1,15 +1,19 @@
-import CObj from './m_obj'
-import { oList } from './m_data'
 import CPlace from './m_place'
 import CShop from './m_shop'
 import CAction from './m_action'
-import { CMenuShop, CMenuAction } from './c_menu.jsx'
+
 
 //////////////////////////////////////
 
 export default function loadMetaData() {
   console.log('Start metadata loading...')
   let mo: any
+
+  mo = new CAction(
+    'action_live',
+    'Live life',
+    'You breathe, recovering and getting older'
+  ).unlock()
 
   // начало истории - маленькая деревня, делать тут нечего
 

@@ -1,4 +1,3 @@
-import React, { Children } from 'react'
 import classes from './v_tabbutton.module.css'
 
 export default function VTabButton(props: {

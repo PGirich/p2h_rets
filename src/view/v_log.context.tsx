@@ -57,11 +57,15 @@ export default function LogProvider(props: { children: ReactNode }) {
   const [arrLogState, setArrLogState] = useState(Date.now())
   const toLog = (ld: LogData) => {
     arrLogData.current.unshift(ld)
+    if (arrLogData.current.length > 100) arrLogData.current.splice(0, 10)
+
     setArrLogState(ld.when)
   }
 
   return (
-    <LogContext.Provider value={{ state: arrLogState, arr: arrLogData, toLog: toLog }}>
+    <LogContext.Provider
+      value={{ state: arrLogState, arr: arrLogData, toLog: toLog }}
+    >
       {props.children}
     </LogContext.Provider>
   )

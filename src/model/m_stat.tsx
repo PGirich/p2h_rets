@@ -1,5 +1,4 @@
 import CObj from './m_obj'
-import { oList, iList, shopList, actList } from './m_data'
 
 export default class CStat extends CObj {
   max: number = 1

@@ -9,7 +9,6 @@ interface propsVObjList {
   action: string // действие над объектами при нажатии в списке
 }
 export default function VObjList(props: propsVObjList) {
-  const [selected, setSelected] = useState('')
   const [filter, setFilter] = useState('')
   const [objList, setObjList] = useState(new Array<CObj>())
   const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {

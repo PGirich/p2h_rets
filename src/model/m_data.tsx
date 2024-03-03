@@ -12,9 +12,3 @@ export const iList = new Map<string, CObj>() // в наличии id объек�
 export const shopList = new Map<string, OnSale>() // в магазине id магазина - {id объект, кол-во}
 export const actList = new Array<CAction>() // список выполняемых действий
 export let currentPlace: string
-
-export let logged = new Array<string>()
-export const log = (s: string) => {
-  logged.unshift(s)
-  if (logged.length > 100) logged.splice(0, 10)
-}

@@ -1,7 +1,9 @@
-import React, { MouseEventHandler, useState } from 'react'
+import { MouseEventHandler } from 'react'
 import CObj from '../model/m_obj'
 import classes from './v_obj.module.css'
 import { LogTypes, useLog } from './v_log.context'
+import { useShedule } from './v_shedule.context'
+import { actList } from '../model/m_data'
 
 interface propsVObj {
   obj: CObj
@@ -10,8 +12,10 @@ interface propsVObj {
 }
 export default function VObj(props: propsVObj) {
   const appLog = useLog()
+  const { setShedule } = useShedule()
 
   const obj = props.obj
+  if (!obj) return null
   const handleObjOnClick: MouseEventHandler = (e) => {
     obj.actionDispatch(props.action)
     appLog.toLog({
@@ -24,6 +28,7 @@ export default function VObj(props: propsVObj) {
       when: Date.now(),
       val: 1,
     })
+    if (props.action === 'perform') setShedule(actList)
   }
 
   return (

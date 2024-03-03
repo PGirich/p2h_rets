@@ -1,4 +1,3 @@
-import React from 'react'
 import classes from './v_header.module.css'
 
 export default function VHeader() {

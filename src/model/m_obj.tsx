@@ -1,4 +1,5 @@
 import { LogTypes, useLog } from '../view/v_log.context'
+import CAction from './m_action'
 import {
   currentPlace,
   oList,
@@ -119,11 +120,13 @@ export default class CObj {
         this.buy(CPlace.currentPlace)
         break
       case 'perform':
-        this.sell(CPlace.currentPlace)
+        if (this instanceof CAction) {
+          ;(this as CAction).begin()
+        }
         break
       case 'travel':
         if (this instanceof CPlace) {
-          ;(this as CPlace).travel(this.name)
+          ;(this as CPlace).travel()
         }
         break
     }

@@ -1,5 +1,5 @@
 import CObj from './m_obj'
-import { oList, iList, shopList, actList } from './m_data'
+import { actList } from './m_data'
 import {
   ObjConditionData,
   ObjChangeData,

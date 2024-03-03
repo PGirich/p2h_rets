@@ -1,6 +1,5 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import {  useState } from 'react'
 import classes from './v_placeinfo.module.css'
-import CPlace from '../model/m_place'
 import { oList } from '../model/m_data'
 
 export default function VPlaceInfo() {
