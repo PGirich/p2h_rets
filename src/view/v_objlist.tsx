@@ -1,5 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import { iList } from '../model/m_data'
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import VObj from './v_obj'
 import CObj from '../model/m_obj'
 import CPlace from '../model/m_place'
@@ -10,17 +9,13 @@ interface propsVObjList {
 }
 export default function VObjList(props: propsVObjList) {
   const [filter, setFilter] = useState('')
-  const [objList, setObjList] = useState(new Array<CObj>())
+  const objList: Array<CObj> = props.cbGetObjList()
   const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value.toUpperCase())
   }
   function isFiltered(value: CObj) {
     return value.caption.toUpperCase().includes(filter)
   }
-
-  useEffect(() => {
-    setObjList(props.cbGetObjList())
-  })
 
   return (
     <div className="VObjList">

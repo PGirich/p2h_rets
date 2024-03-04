@@ -1,14 +1,5 @@
-import { LogTypes, useLog } from '../view/v_log.context'
 import CAction from './m_action'
-import {
-  currentPlace,
-  oList,
-  iList,
-  shopList,
-  OnSale,
-  CObjCnt,
-  actList,
-} from './m_data'
+import { oList, iList, shopList, OnSale } from './m_data'
 import CPlace from './m_place'
 
 export default class CObj {
@@ -107,10 +98,11 @@ export default class CObj {
     this.owned = true
     return true
   }
+  // продать
   sell(pshop: string, pcnt = 1): boolean {
     return false
   }
-
+  // выполнить действие над объектом
   actionDispatch(action: string): void {
     switch (action) {
       case 'unlock':
@@ -118,7 +110,7 @@ export default class CObj {
         break
       case 'buy':
         this.buy(CPlace.currentPlace)
-        break
+        break /*
       case 'perform':
         if (this instanceof CAction) {
           ;(this as CAction).begin()
@@ -128,7 +120,7 @@ export default class CObj {
         if (this instanceof CPlace) {
           ;(this as CPlace).travel()
         }
-        break
+        break */
     }
   }
 }

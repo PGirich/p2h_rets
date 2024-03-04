@@ -1,7 +1,5 @@
-import React, { MouseEventHandler, useState } from 'react'
+import React, { MouseEventHandler } from 'react'
 import classes from './v_shedule.module.css'
-import { iList } from '../model/m_data'
-import CAction from '../model/m_action'
 import { useShedule } from './v_shedule.context'
 
 export default function VShedule() {

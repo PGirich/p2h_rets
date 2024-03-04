@@ -2,7 +2,6 @@ import CPlace from './m_place'
 import CShop from './m_shop'
 import CAction from './m_action'
 
-
 //////////////////////////////////////
 
 export default function loadMetaData() {

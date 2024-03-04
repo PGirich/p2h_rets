@@ -19,7 +19,9 @@ interface IPropsSheduleContext extends IStateSheduleContext {
 // создаем контекст
 const SheduleContext = React.createContext({} as IPropsSheduleContext)
 export const useShedule = () => {
-  return useContext(SheduleContext)
+  const context = React.useContext(SheduleContext)
+  if (!context) throw new Error('Use Shedule context within provider!')
+  return context
 }
 // действия диспетчера
 const enum ActionTypes {
@@ -68,7 +70,6 @@ export default function SheduleProvider(props: { children: ReactNode }) {
     currentRestAction: oList.get('action_live')! as CAction,
     maxTasks: 1,
   })
-  console.log(oList.get('action_live'))
   // actions
   const setFocus = (value: number) =>
     dispatch({ type: ActionTypes.SHEDULE_SETFOCUS, value })

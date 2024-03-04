@@ -127,11 +127,11 @@ export default function VLog() {
       >
         battle
       </VLogFilter>
-      <div>Log at {new Date(appLog.state).toLocaleString()}</div>
+      <div key={'log'}>Log at {new Date(appLog.state).toLocaleString()}</div>
       {appLog.arr!.current
         .filter((ld) => logTypesToHide.has(ld.type))
-        .map((ld) => (
-          <div>{logDataToStr(ld)}</div>
+        .map((ld,idx) => (
+          <div key={idx} className={classes.VLogEntry} >{logDataToStr(ld)}</div>
         ))}
     </div>
   )
