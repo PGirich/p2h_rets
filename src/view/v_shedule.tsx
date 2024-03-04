@@ -19,8 +19,8 @@ export default function VShedule() {
         FOCUS
       </button>
       <br></br>
-      {shedule.map((act) => (
-        <div>
+      {shedule.map((act, idx) => (
+        <div className={classes.VSheduleEntryBox} key={idx}>
           <h1>{act.caption}</h1>
         </div>
       ))}

@@ -110,17 +110,17 @@ export default class CObj {
         break
       case 'buy':
         this.buy(CPlace.currentPlace)
-        break /*
+        break
       case 'perform':
-        if (this instanceof CAction) {
-          ;(this as CAction).begin()
+        if (this.type === 'action') {
+          ;(this as unknown as CAction).begin()
         }
         break
       case 'travel':
-        if (this instanceof CPlace) {
-          ;(this as CPlace).travel()
+        if ((this.type = 'place')) {
+          ;(this as unknown as CPlace).travel()
         }
-        break */
+        break
     }
   }
 }

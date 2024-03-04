@@ -12,7 +12,8 @@ export default function loadMetaData() {
     'action_live',
     'Live life',
     'You breathe, recovering and getting older'
-  ).unlock()
+  )
+  mo.unlock()
 
   // начало истории - маленькая деревня, делать тут нечего
 
