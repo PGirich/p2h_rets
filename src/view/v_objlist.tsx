@@ -1,15 +1,17 @@
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import VObj from './v_obj'
 import CObj from '../model/m_obj'
-import CPlace from '../model/m_place'
+import { ObjActionTypes, useObj } from './v_obj.context'
 
 interface propsVObjList {
   cbGetObjList: () => Array<CObj> // получение массива объектов
-  action: string // действие над объектами при нажатии в списке
+  action: ObjActionTypes // действие над объектами при нажатии в списке
 }
 export default function VObjList(props: propsVObjList) {
   const [filter, setFilter] = useState('')
+  const { currentPlace, actionDispatch } = useObj()
   const objList: Array<CObj> = props.cbGetObjList()
+
   const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value.toUpperCase())
   }
@@ -36,7 +38,7 @@ export default function VObjList(props: propsVObjList) {
             key={o.name}
             obj={o}
             action={props.action}
-            isActive={o.name === CPlace.currentPlace}
+            isActive={o.name === currentPlace.name}
           />
         ))}
     </div>
