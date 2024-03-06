@@ -9,3 +9,11 @@
 .VSheduleEntryBox {
   border: solid 1px;
 }
+.VSheduleEntryBtns {
+  display: block;
+  float: right;
+}
+.VSheduleEntryBtn {
+  padding: 2px 2px;
+  margin-left: 5px;
+}
