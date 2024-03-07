@@ -1,10 +1,11 @@
 .VProgress{
-    height:40px;
-    line-height:40px;
+    height:20px;
+    line-height:20px;
     width:200px;
     position:relative;    
     text-align:center;
     color:black;
+    padding: 4px;
 }
 .VProgress span{
     position:absolute;
@@ -16,5 +17,5 @@
 .VProgress span:last-child{
     background-color:green;
     color:white;
-    clip:rect(0 0px 40px 0);
+    clip:rect(0 0px 20px 0);
 }

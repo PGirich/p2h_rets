@@ -22,7 +22,6 @@ export default function VShedule() {
       <br></br>
       {shedule.map((act, idx) => (
         <div className={classes.VSheduleEntryBox} key={idx}>
-          <progress max={100} value={70}>{act.caption}</progress>
           <div className={classes.VSheduleEntryBtns}>
           <VProgress value = {act.actionProgress} max={act.actionLength}>{act.caption}</VProgress>
             <button className={classes.VSheduleEntryBtn}>stop</button>
