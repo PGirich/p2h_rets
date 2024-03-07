@@ -3,6 +3,7 @@ import classes from './v_shedule.module.css'
 import { iList } from '../model/m_data'
 import CAction from '../model/m_action'
 import { useShedule } from './v_shedule.context'
+import VProgress from './v_progress'
 
 export default function VShedule() {
   const { shedule, setShedule } = useShedule()
@@ -24,6 +25,7 @@ export default function VShedule() {
       {shedule.map((act) => (
         <div>
           <h1>{act.caption}</h1>
+          <VProgress value = {act.actionProgress} max={act.actionLength}>{act.caption}</VProgress>
         </div>
       ))}
     </div>

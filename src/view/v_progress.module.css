@@ -1,0 +1,20 @@
+.VProgress{
+    height:40px;
+    line-height:40px;
+    width:200px;
+    position:relative;    
+    text-align:center;
+    color:black;
+}
+.VProgress span{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    background-color:gray;
+}
+.VProgress span:last-child{
+    background-color:green;
+    color:white;
+    clip:rect(0 0px 40px 0);
+}
