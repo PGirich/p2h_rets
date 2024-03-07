@@ -1,7 +1,5 @@
-import React, { MouseEventHandler, useState } from 'react'
+import React, { MouseEventHandler } from 'react'
 import classes from './v_shedule.module.css'
-import { iList } from '../model/m_data'
-import CAction from '../model/m_action'
 import { useShedule } from './v_shedule.context'
 import VProgress from './v_progress'
 
@@ -22,10 +20,16 @@ export default function VShedule() {
         FOCUS
       </button>
       <br></br>
-      {shedule.map((act) => (
-        <div>
-          <h1>{act.caption}</h1>
+      {shedule.map((act, idx) => (
+        <div className={classes.VSheduleEntryBox} key={idx}>
+          <progress max={100} value={70}>{act.caption}</progress>
+          <div className={classes.VSheduleEntryBtns}>
           <VProgress value = {act.actionProgress} max={act.actionLength}>{act.caption}</VProgress>
+            <button className={classes.VSheduleEntryBtn}>stop</button>
+            <button className={classes.VSheduleEntryBtn}>up</button>
+            <button className={classes.VSheduleEntryBtn}>down</button>
+
+          </div>
         </div>
       ))}
     </div>

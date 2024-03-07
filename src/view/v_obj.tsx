@@ -4,20 +4,22 @@ import classes from './v_obj.module.css'
 import { LogTypes, useLog } from './v_log.context'
 import { useShedule } from './v_shedule.context'
 import { actList } from '../model/m_data'
+import { ObjActionTypes, useObj } from './v_obj.context'
 
 interface propsVObj {
   obj: CObj
-  action: string
+  action: ObjActionTypes
   isActive: boolean
 }
 export default function VObj(props: propsVObj) {
   const appLog = useLog()
   const { setShedule } = useShedule()
+  const { actionDispatch } = useObj()
 
   const obj = props.obj
   if (!obj) return null
   const handleObjOnClick: MouseEventHandler = (e) => {
-    obj.actionDispatch(props.action)
+    actionDispatch(obj, props.action)
     appLog.toLog({
       type:
         props.action === 'unlock'
@@ -28,7 +30,7 @@ export default function VObj(props: propsVObj) {
       when: Date.now(),
       val: 1,
     })
-    if (props.action === 'perform') setShedule(actList)
+    if (props.action === ObjActionTypes.ACTION_PERFORM) setShedule(actList)
   }
 
   return (

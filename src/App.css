@@ -1,4 +1,4 @@
-div{
+div {
   border: none 1px;
 }
 .inputFilter {
@@ -8,4 +8,12 @@ div{
   width: 100%;
   max-width: 100px;
   margin: 1;
+}
+progress {
+  background-color: #f3f3f3;
+  accent-color: coral;
+  border: 0;
+  height: 18px;
+  border-radius: 9px;
+  content: attr(value) '%';
 }

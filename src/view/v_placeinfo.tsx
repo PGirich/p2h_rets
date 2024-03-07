@@ -1,9 +1,8 @@
-import {  useState } from 'react'
 import classes from './v_placeinfo.module.css'
-import { oList } from '../model/m_data'
+import { useObj } from './v_obj.context'
 
 export default function VPlaceInfo() {
-  const [currentPlace, setCurrentPlace] = useState(oList.get('place_village')!)
+  const { currentPlace } = useObj()
 
   return (
     <div className={classes.VPlaceInfo}>
