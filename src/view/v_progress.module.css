@@ -1,21 +1,24 @@
-.VProgress{
-    height:20px;
-    line-height:20px;
-    width:200px;
-    position:relative;    
-    text-align:center;
-    color:black;
-    padding: 4px;
+.VProgress {
+  display: inline-block;
+  height: 1.1em;
+  line-height: 1.2em;
+  width: 200px;
+  position: relative;
+  text-align: center;
+  vertical-align: bottom;
+  color: black;
+  padding: 2px;
+  margin: none;
 }
-.VProgress span{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    background-color:gray;
+.VProgress span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: gray;
 }
-.VProgress span:last-child{
-    background-color:green;
-    color:white;
-    clip:rect(0 0px 20px 0);
+.VProgress span:last-child {
+  background-color: darkorange;
+  color: white;
+  clip-path: rect(0 100px 1em 0);
 }

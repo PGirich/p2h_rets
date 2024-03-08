@@ -1,3 +1,9 @@
+.VLog {
+  border: dotted 1px black;
+  margin: 5px;
+  padding: 2px;
+}
+
 .VLogEntry {
-  border: solid 1px;
+  border: none
 }

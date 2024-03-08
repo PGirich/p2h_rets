@@ -10,6 +10,7 @@ import VLog from './view/v_log'
 import LogProvider from './view/v_log.context'
 import SheduleProvider from './view/v_shedule.context'
 import ObjProvider, { ObjActionTypes } from './view/v_obj.context'
+import VStatList from './view/v_statlist'
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState('onsalelist')
@@ -32,8 +33,14 @@ export default function App() {
             />
             {/* описание местонахождения */}
             <VPlaceInfo />
-            {/* описание местонахождения */}
+            {/* запланированные действия */}
             <VShedule />
+            {/* статы */}
+            <VStatList
+              cbGetObjList={() =>
+                Array.from(iList.values()).filter((o) => o.type === 'stat')
+              }
+            />
             {/* текущие объекты */}
             {currentTab === ObjActionTypes.ACTION_TRAVEL && (
               <VObjList

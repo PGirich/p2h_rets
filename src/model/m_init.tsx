@@ -1,6 +1,7 @@
 import CPlace from './m_place'
 import CShop from './m_shop'
 import CAction from './m_action'
+import CStat from './m_stat'
 
 //////////////////////////////////////
 
@@ -43,12 +44,6 @@ export default function loadMetaData() {
     'place_forest'
   ).unlock('shop')
 
-  mo = new CAction(
-    'action_cleaning',
-    'Cleaning job',
-    'You can get some charity for cleaninf street from random housewife'
-  ).unlock('place_village')
-
   mo = new CPlace(
     'place_innerworld',
     'Inner world',
@@ -56,12 +51,44 @@ export default function loadMetaData() {
   )
 
   // ====================================================
+  // stats
+  mo = new CStat('stat_gold', 'gold', 'A heavy purse makes a light heart')
+  mo.color = 'gold'
+  mo.unlock()
+
+  mo = new CStat('stat_stamina', 'stamina', 'Are you tired?')
+  mo.color = 'darkorange'
+  mo.unlock()
+
+  mo = new CStat('stat_vitality', 'vitality', 'Good health is above wealth')
+  mo.color = 'red'
+  mo.unlock()
+
+  mo = new CStat(
+    'stat_age',
+    'age',
+    'We turn not older with years, but newer every day'
+  )
+  mo.color = 'olive'
+  mo.unlock()
+
+  // ====================================================
   // actions
-  mo = new CAction('begging', 'begging', 'begging passersby for money')
+  mo = new CAction(
+    'action_cleaning',
+    'Cleaning job',
+    'You can get some charity for cleaninf street from random housewife'
+  )
+  mo.resUse = [{ prop: 'gold', cost: 1 }]
+  mo.resTic = [{ prop: 'stamina', cost: 0.5 }]
+  mo.actionLength = 4
+  mo.unlock()
+
+  mo = new CAction('action_begging', 'begging', 'begging passersby for money')
   mo.resUse = [{ prop: 'gold', cost: 0.01 }]
   mo.resTic = [{ prop: 'stamina', cost: 0.3 }]
   mo.actionLength = 8
-  mo.unlock('inborn')
+  mo.unlock()
 
   mo = new CAction(
     'learning_reading',
@@ -69,10 +96,7 @@ export default function loadMetaData() {
     'learning how to read with old teacher'
   ).unlock('village')
   mo.condUse = [{ prop: 'filth', op: `<`, val: 1 }]
-  mo.resUse = [
-    { prop: 'scholar', cost: 0.01 },
-    { prop: 'scholar', cost: 0.01 },
-  ]
+  mo.resUse = [{ prop: 'scholar', cost: 0.01 }]
   mo.resTic = [{ prop: 'stamina', cost: 0.3 }]
   mo.actionLength = 200
 

@@ -11,7 +11,7 @@ export default function VShedule() {
   }
 
   return (
-    <div className="VShedule">
+    <div className={classes.VShedule}>
       <h1>On shedule:{shedule.length.toString()}</h1>
       <button className={classes.VSheduleButton} onClick={btRestClickHandler}>
         REST
@@ -23,11 +23,17 @@ export default function VShedule() {
       {shedule.map((act, idx) => (
         <div className={classes.VSheduleEntryBox} key={idx}>
           <div className={classes.VSheduleEntryBtns}>
-          <VProgress value = {act.actionProgress} max={act.actionLength}>{act.caption}</VProgress>
+            <span>{act.caption + ':  '}</span>
+            <VProgress
+              value={act.actionProgress}
+              max={act.actionLength}
+              color="green"
+            >
+              {act.caption}
+            </VProgress>
             <button className={classes.VSheduleEntryBtn}>stop</button>
             <button className={classes.VSheduleEntryBtn}>up</button>
             <button className={classes.VSheduleEntryBtn}>down</button>
-
           </div>
         </div>
       ))}
