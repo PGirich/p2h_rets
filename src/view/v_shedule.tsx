@@ -2,13 +2,14 @@ import React, { MouseEventHandler } from 'react'
 import classes from './v_shedule.module.css'
 import { useShedule } from './v_shedule.context'
 import VProgress from './v_progress'
-import { actList } from '../model/m_data'
+import { actList, oList } from '../model/m_data'
 
 export default function VShedule() {
-  const { shedule, maxTasks, setShedule } = useShedule()
+  const { shedule, maxTasks, currentRestAction, setShedule } = useShedule()
 
   const btRestClickHandler: MouseEventHandler = (e) => {
-    console.log(e.target)
+    currentRestAction.begin()
+    setShedule(actList)
   }
 
   return (
@@ -42,8 +43,24 @@ export default function VShedule() {
             >
               stop
             </button>
-            <button className={classes.VSheduleEntryBtn}>up</button>
-            <button className={classes.VSheduleEntryBtn}>down</button>
+            <button
+              className={classes.VSheduleEntryBtn}
+              onClick={() => {
+                act.up()
+                setShedule(actList)
+              }}
+            >
+              up
+            </button>
+            <button
+              className={classes.VSheduleEntryBtn}
+              onClick={() => {
+                act.down()
+                setShedule(actList)
+              }}
+            >
+              down
+            </button>
           </div>
         </div>
       ))}

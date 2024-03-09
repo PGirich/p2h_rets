@@ -3,6 +3,7 @@ import { oList } from '../model/m_data'
 import CAction from '../model/m_action'
 import CPlace from '../model/m_place'
 import CObj from '../model/m_obj'
+import { PLACE_VILLAGE } from '../model/m_init'
 
 // тип состояния
 interface IStateObjContext {
@@ -65,7 +66,7 @@ const reducer = (state: IStateObjContext, action: IObjAction) => {
 export default function ObjProvider(props: { children: ReactNode }) {
   // initial value
   const [state, dispatch] = useReducer(reducer, {
-    currentPlace: oList.get('place_village') as CPlace,
+    currentPlace: oList.get(PLACE_VILLAGE) as CPlace,
   })
   //
   const actionDispatch = (obj: CObj, actn: ObjActionTypes) => {

@@ -1,6 +1,8 @@
-import React, { ReactNode, useContext, useReducer } from 'react'
-import { oList } from '../model/m_data'
+import React, { ReactNode, useContext, useEffect, useReducer } from 'react'
+import { actListApply, oList } from '../model/m_data'
 import CAction from '../model/m_action'
+import { ACTION_LIVE, ACTION_REST, STAT_AGE } from '../model/m_init'
+import CStat from '../model/m_stat'
 
 // тип состояния
 interface IStateSheduleContext {
@@ -8,6 +10,7 @@ interface IStateSheduleContext {
   focus: number
   currentRestAction: CAction
   maxTasks: number
+  currentTime: number
 }
 // тип передаваемого контекста
 interface IPropsSheduleContext extends IStateSheduleContext {
@@ -29,9 +32,13 @@ const enum ActionTypes {
   SHEDULE_SETREST = 'setRest',
   SHEDULE_SETMAXTASKS = 'setFocusMaxTasks',
   SHEDULE_SETSHEDULE = 'setShedule',
+  SHEDULE_SETCURRENTTIME = 'setCurrentTime',
 }
 interface IActionN {
-  type: ActionTypes.SHEDULE_SETFOCUS | ActionTypes.SHEDULE_SETMAXTASKS
+  type:
+    | ActionTypes.SHEDULE_SETFOCUS
+    | ActionTypes.SHEDULE_SETMAXTASKS
+    | ActionTypes.SHEDULE_SETCURRENTTIME
   value: number
 }
 interface IActionO {
@@ -55,6 +62,10 @@ const reducer = (state: IStateSheduleContext, action: IAction) => {
       return { ...state, maxTasks: action.value }
     case ActionTypes.SHEDULE_SETSHEDULE:
       return { ...state, shedule: action.arrObj }
+    case ActionTypes.SHEDULE_SETCURRENTTIME:
+      const ct = state.currentTime + action.value;
+      (oList.get(STAT_AGE)as unknown as CStat).count = ct
+      return { ...state, currentTime: state.currentTime + action.value }
     default:
       break
   }
@@ -67,8 +78,9 @@ export default function SheduleProvider(props: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, {
     shedule: new Array<CAction>(),
     focus: 0,
-    currentRestAction: oList.get('action_live')! as CAction,
+    currentRestAction: oList.get(ACTION_REST)! as CAction,
     maxTasks: 1,
+    currentTime: 10 * 365 * 6, // примерно 6 лет
   })
   // actions
   const setFocus = (value: number) =>
@@ -79,6 +91,17 @@ export default function SheduleProvider(props: { children: ReactNode }) {
     dispatch({ type: ActionTypes.SHEDULE_SETMAXTASKS, value })
   const setShedule = (arrObj: Array<CAction>) =>
     dispatch({ type: ActionTypes.SHEDULE_SETSHEDULE, arrObj })
+  const setCurrentTime = (value: number) =>
+    dispatch({ type: ActionTypes.SHEDULE_SETCURRENTTIME, value })
+
+  // process shedule
+  useEffect(() => {
+    const processTimer = setInterval(() => {
+      actListApply()
+      setCurrentTime(1)
+    }, 1000)
+    return () => clearInterval(processTimer)
+  })
 
   // element
   return (
@@ -88,6 +111,7 @@ export default function SheduleProvider(props: { children: ReactNode }) {
         focus: state.focus,
         currentRestAction: state.currentRestAction,
         maxTasks: state.maxTasks,
+        currentTime: state.currentTime,
         setFocus,
         setRest,
         setMaxTasks,
