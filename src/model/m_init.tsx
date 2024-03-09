@@ -9,6 +9,8 @@ export const ACTION_LIVE = 'action_live'
 export const PLACE_VILLAGE = 'place_village'
 export const ACTION_REST = 'action_rest'
 export const STAT_AGE = 'stat_age'
+export const STAT_AGE_MONTH_LENGTH = 10
+export const STAT_AGE_REBORN = 6 * 12 * STAT_AGE_MONTH_LENGTH
 
 export default function loadMetaData() {
   console.log('Start metadata loading...')

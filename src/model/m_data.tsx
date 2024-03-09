@@ -1,6 +1,6 @@
 import CObj from './m_obj'
 import CAction from './m_action'
-import { ACTION_LIVE } from './m_init'
+import { ACTION_LIVE, STAT_AGE_MONTH_LENGTH } from './m_init'
 
 export interface CObjCnt {
   o: CObj
@@ -16,4 +16,10 @@ export const actList = new Array<CAction>() // список выполняемы
 export function actListApply() {
   (oList.get(ACTION_LIVE) as unknown as CAction).apply()
   actList.forEach((act) => act.apply())
+}
+
+export function timeToYearStr(time:number){
+  const year = Math.floor(time / (12*STAT_AGE_MONTH_LENGTH) );
+  const month = Math.floor((time - year*12*STAT_AGE_MONTH_LENGTH)/STAT_AGE_MONTH_LENGTH)
+   return `${year}y.${month}m.`
 }

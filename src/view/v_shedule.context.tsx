@@ -1,7 +1,12 @@
 import React, { ReactNode, useContext, useEffect, useReducer } from 'react'
 import { actListApply, oList } from '../model/m_data'
 import CAction from '../model/m_action'
-import { ACTION_LIVE, ACTION_REST, STAT_AGE } from '../model/m_init'
+import {
+  ACTION_LIVE,
+  ACTION_REST,
+  STAT_AGE,
+  STAT_AGE_REBORN,
+} from '../model/m_init'
 import CStat from '../model/m_stat'
 
 // тип состояния
@@ -63,8 +68,8 @@ const reducer = (state: IStateSheduleContext, action: IAction) => {
     case ActionTypes.SHEDULE_SETSHEDULE:
       return { ...state, shedule: action.arrObj }
     case ActionTypes.SHEDULE_SETCURRENTTIME:
-      const ct = state.currentTime + action.value;
-      (oList.get(STAT_AGE)as unknown as CStat).count = ct
+      const ct = state.currentTime + action.value
+      ;(oList.get(STAT_AGE) as unknown as CStat).count = ct
       return { ...state, currentTime: state.currentTime + action.value }
     default:
       break
@@ -80,7 +85,7 @@ export default function SheduleProvider(props: { children: ReactNode }) {
     focus: 0,
     currentRestAction: oList.get(ACTION_REST)! as CAction,
     maxTasks: 1,
-    currentTime: 10 * 365 * 6, // примерно 6 лет
+    currentTime: STAT_AGE_REBORN,
   })
   // actions
   const setFocus = (value: number) =>
