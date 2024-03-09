@@ -17,3 +17,17 @@ progress {
   border-radius: 9px;
   content: attr(value) '%';
 }
+.clearfix {
+  clear: both;
+}
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+  flex-flow: row nowrap;
+}
+.wrapperCenter {
+  display: flexbox;
+}
+.wrapperRight {
+  display: flexbox;
+}

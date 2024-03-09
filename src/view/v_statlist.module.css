@@ -1,9 +1,10 @@
 .VStatList {
   background-color: beige;
   border: dotted 1px black;
-  margin: 5px;
+  margin: 2px;
   padding: 2px;
   width: 250px;
+  flex-flow: column wrap;
 }
 .VStatListEntryBox {
   background-color: rgb(248, 248, 213);

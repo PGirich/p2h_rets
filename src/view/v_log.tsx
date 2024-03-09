@@ -28,6 +28,7 @@ function VLogFilter(props: propsVLogFilter) {
     <>
       <input
         type="checkbox"
+        className={classes.VLogCheckBox}
         id={'cb' + props.ld}
         checked={props.value}
         onChange={cbChangeHandler}
@@ -128,10 +129,12 @@ export default function VLog() {
         battle
       </VLogFilter>
       <div key={'log'}>Log at {new Date(appLog.state).toLocaleString()}</div>
-      {appLog.arr!.current
-        .filter((ld) => logTypesToHide.has(ld.type))
-        .map((ld,idx) => (
-          <div key={idx} className={classes.VLogEntry} >{logDataToStr(ld)}</div>
+      {appLog
+        .arr!.current.filter((ld) => logTypesToHide.has(ld.type))
+        .map((ld, idx) => (
+          <div key={idx} className={classes.VLogEntry}>
+            {logDataToStr(ld)}
+          </div>
         ))}
     </div>
   )

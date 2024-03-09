@@ -1,16 +1,19 @@
 .VShedule {
+  max-width: 500px;
   border: dotted 1px black;
- 
+  margin: 2px;
   padding: 2px;
 }
 .VSheduleButton {
-  padding: 5px 5px;
+  display: inline;
+  padding: 2px 5px;
   margin-left: 10px;
 }
 .VSheduleEntryBox {
   display: block;
   background-color: aquamarine;
-  border: solid 1px;
+  border: solid 1px aquamarine;
+  padding: 2px;
   margin: 2px;
 }
 .VSheduleEntryBtns {

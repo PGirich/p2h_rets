@@ -1,18 +1,17 @@
 .VHeader {
   float: left;
-  display: block;
+  border: dotted 1px gray;
+  margin: none;
 }
 .VHeaderImg {
-  float: left;
-  display: block;
+  display: inline-block;
   width: 70px;
   margin: 2px;
 }
-.VHeaderSpan { 
-  float: left;
-  display: block;
+.VHeaderSpan {
+  display: inline-block;
+  vertical-align: top;
   color: rgb(41, 19, 82);
-  vertical-align: center;
   font-size: 1.2em;
-  width:70px;
+  width: 70px;
 }

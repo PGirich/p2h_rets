@@ -1,9 +1,15 @@
 .VLog {
+  max-width: 500px;
   border: dotted 1px black;
-  margin: 5px;
   padding: 2px;
+  margin: 2px;
 }
 
 .VLogEntry {
-  border: none
+  border: none;
+}
+
+.VLogCheckBox{
+  margin-left: 5px;
+  margin-right: 5px;
 }

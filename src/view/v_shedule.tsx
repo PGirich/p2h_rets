@@ -2,9 +2,10 @@ import React, { MouseEventHandler } from 'react'
 import classes from './v_shedule.module.css'
 import { useShedule } from './v_shedule.context'
 import VProgress from './v_progress'
+import { actList } from '../model/m_data'
 
 export default function VShedule() {
-  const { shedule, setShedule } = useShedule()
+  const { shedule, maxTasks, setShedule } = useShedule()
 
   const btRestClickHandler: MouseEventHandler = (e) => {
     console.log(e.target)
@@ -12,7 +13,9 @@ export default function VShedule() {
 
   return (
     <div className={classes.VShedule}>
-      <h1>On shedule:{shedule.length.toString()}</h1>
+      <span>
+        On shedule:{shedule.length.toString()}/{maxTasks}
+      </span>
       <button className={classes.VSheduleButton} onClick={btRestClickHandler}>
         REST
       </button>
@@ -23,7 +26,6 @@ export default function VShedule() {
       {shedule.map((act, idx) => (
         <div className={classes.VSheduleEntryBox} key={idx}>
           <div className={classes.VSheduleEntryBtns}>
-            <span>{act.caption + ':  '}</span>
             <VProgress
               value={act.actionProgress}
               max={act.actionLength}
@@ -31,7 +33,15 @@ export default function VShedule() {
             >
               {act.caption}
             </VProgress>
-            <button className={classes.VSheduleEntryBtn}>stop</button>
+            <button
+              className={classes.VSheduleEntryBtn}
+              onClick={() => {
+                act.end()
+                setShedule(actList)
+              }}
+            >
+              stop
+            </button>
             <button className={classes.VSheduleEntryBtn}>up</button>
             <button className={classes.VSheduleEntryBtn}>down</button>
           </div>

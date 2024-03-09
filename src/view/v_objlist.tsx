@@ -2,6 +2,7 @@ import React, { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import VObj from './v_obj'
 import CObj from '../model/m_obj'
 import { ObjActionTypes, useObj } from './v_obj.context'
+import classes from './v_objlist.module.css'
 
 interface propsVObjList {
   cbGetObjList: () => Array<CObj> // получение массива объектов
@@ -20,7 +21,7 @@ export default function VObjList(props: propsVObjList) {
   }
 
   return (
-    <div className="VObjList">
+    <div className={classes.VObjList}>
       <label htmlFor="inputFilter">Filter:</label>
       <input
         type="text"

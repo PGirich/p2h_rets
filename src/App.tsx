@@ -13,7 +13,7 @@ import ObjProvider, { ObjActionTypes } from './view/v_obj.context'
 import VStatList from './view/v_statlist'
 
 export default function App() {
-  const [currentTab, setCurrentTab] = useState('onsalelist')
+  const [currentTab, setCurrentTab] = useState('perform')
   return (
     <LogProvider>
       <ObjProvider>
@@ -31,50 +31,63 @@ export default function App() {
               ]}
               onChange={(tab: string) => setCurrentTab(tab)}
             />
-            {/* описание местонахождения */}
-            <VPlaceInfo />
-            {/* запланированные действия */}
-            <VShedule />
-            {/* статы */}
-            <VStatList
-              cbGetObjList={() =>
-                Array.from(iList.values()).filter((o) => o.type === 'stat')
-              }
-            />
-            {/* текущие объекты */}
-            {currentTab === ObjActionTypes.ACTION_TRAVEL && (
-              <VObjList
-                cbGetObjList={() =>
-                  Array.from(iList.values()).filter((o) => o.type === 'place')
-                }
-                action={ObjActionTypes.ACTION_TRAVEL}
-              />
-            )}
-            {currentTab === ObjActionTypes.ACTION_BUY && (
-              <VObjList
-                cbGetObjList={() =>
-                  Array.from(oList.values()).filter((o) => !o.unlocked)
-                }
-                action={ObjActionTypes.ACTION_BUY}
-              />
-            )}{' '}
-            {currentTab === ObjActionTypes.ACTION_PERFORM && (
-              <VObjList
-                cbGetObjList={() =>
-                  Array.from(iList.values()).filter((o) => o.type === 'action')
-                }
-                action={ObjActionTypes.ACTION_PERFORM}
-              />
-            )}
-            {currentTab === ObjActionTypes.ACTION_EQUIP && (
-              <VObjList
-                cbGetObjList={() =>
-                  Array.from(iList.values()).filter((o) => o.type === 'wear')
-                }
-                action={ObjActionTypes.ACTION_EQUIP}
-              />
-            )}
-            <VLog />
+            <div className="clearfix" />
+            <main className="wrapper">
+              <div className="wrapperCenter">
+                {/* текущие объекты */}
+                {currentTab === ObjActionTypes.ACTION_TRAVEL && (
+                  <VObjList
+                    cbGetObjList={() =>
+                      Array.from(iList.values()).filter(
+                        (o) => o.type === 'place'
+                      )
+                    }
+                    action={ObjActionTypes.ACTION_TRAVEL}
+                  />
+                )}
+                {currentTab === ObjActionTypes.ACTION_BUY && (
+                  <VObjList
+                    cbGetObjList={() =>
+                      Array.from(oList.values()).filter((o) => !o.unlocked)
+                    }
+                    action={ObjActionTypes.ACTION_BUY}
+                  />
+                )}{' '}
+                {currentTab === ObjActionTypes.ACTION_PERFORM && (
+                  <VObjList
+                    cbGetObjList={() =>
+                      Array.from(iList.values()).filter(
+                        (o) => o.type === 'action'
+                      )
+                    }
+                    action={ObjActionTypes.ACTION_PERFORM}
+                  />
+                )}
+                {currentTab === ObjActionTypes.ACTION_EQUIP && (
+                  <VObjList
+                    cbGetObjList={() =>
+                      Array.from(iList.values()).filter(
+                        (o) => o.type === 'wear'
+                      )
+                    }
+                    action={ObjActionTypes.ACTION_EQUIP}
+                  />
+                )}
+              </div>
+              <div className="wrapperRight">
+                {/* описание местонахождения */}
+                <VPlaceInfo />
+                {/* запланированные действия */}
+                <VShedule />
+                {/* статы */}
+                <VStatList
+                  cbGetObjList={() =>
+                    Array.from(iList.values()).filter((o) => o.type === 'stat')
+                  }
+                />
+                <VLog />
+              </div>
+            </main>
           </div>
         </SheduleProvider>
       </ObjProvider>
