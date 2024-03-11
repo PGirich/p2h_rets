@@ -1,6 +1,7 @@
 import CObj from './m_obj'
 import CAction from './m_action'
 import { ACTION_LIVE, STAT_AGE_MONTH_LENGTH } from './m_init'
+import CItem from './m_item'
 
 export interface CObjCnt {
   o: CObj
@@ -14,12 +15,14 @@ export const shopList = new Map<string, OnSale>() // в магазине id ма
 export const actList = new Array<CAction>() // список выполняемых действий
 
 export function actListApply() {
-  (oList.get(ACTION_LIVE) as unknown as CAction).apply()
+  ;(oList.get(ACTION_LIVE) as unknown as CAction).apply()
   actList.forEach((act) => act.apply())
 }
 
-export function timeToYearStr(time:number){
-  const year = Math.floor(time / (12*STAT_AGE_MONTH_LENGTH) );
-  const month = Math.floor((time - year*12*STAT_AGE_MONTH_LENGTH)/STAT_AGE_MONTH_LENGTH)
-   return `${year}y.${month}m.`
+export function timeToYearStr(time: number) {
+  const year = Math.floor(time / (12 * STAT_AGE_MONTH_LENGTH))
+  const month = Math.floor(
+    (time - year * 12 * STAT_AGE_MONTH_LENGTH) / STAT_AGE_MONTH_LENGTH
+  )
+  return `${year}y.${month}m.`
 }

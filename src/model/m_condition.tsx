@@ -1,5 +1,6 @@
 import CObj from './m_obj'
-import { iList } from './m_data'
+import { iList, oList } from './m_data'
+import CStat from './m_stat'
 
 // структура для указания условия
 export interface ObjConditionData {
@@ -13,7 +14,7 @@ export interface ObjConditionData {
 // структура для применения результата
 export interface ObjChangeData {
   prop: string
-  cost: number
+  add: number
   result: boolean
 }
 
@@ -22,7 +23,7 @@ const ObjConditionCheck = (cd: ObjConditionData): boolean => {
   cd.result = false
   if (!cd.specfn) {
     let p: CObj | undefined = iList.get(cd.prop)
-    if (!p) return false
+    if (!p || !p.unlocked) return false
     let val = p.count
     switch (cd.op) {
       case '>':
@@ -55,7 +56,7 @@ const ObjChangeCheck = (cd: ObjChangeData): boolean => {
   cd.result = false
   let p: CObj | undefined = iList.get(cd.prop)
   if (!p) return false
-  if (p.count < cd.cost) return false
+  if (p.count < -1*cd.add) return false
   cd.result = true
   return true
 }
@@ -68,8 +69,9 @@ export const ObjChangesApply = (cda: ObjChangeData[]): boolean => {
   })
   if (!res) return false
   cda.forEach((cd) => {
-    let p = iList.get(cd.prop)
-    p!.count -= cd.cost
+    let p = iList.get(cd.prop)!
+    p.count += cd.add
+    if (p instanceof CStat && p.count>p.max) p.count = p.max 
   })
   return true
 }

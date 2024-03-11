@@ -4,6 +4,7 @@ import CAction from '../model/m_action'
 import CPlace from '../model/m_place'
 import CObj from '../model/m_obj'
 import { PLACE_VILLAGE } from '../model/m_init'
+import COutfit from '../model/m_outfit'
 
 // тип состояния
 interface IStateObjContext {
@@ -55,6 +56,7 @@ const reducer = (state: IStateObjContext, action: IObjAction) => {
       obj.unlock(state.currentPlace.name)
       break
     case ObjActionTypes.ACTION_EQUIP:
+      ;(obj as unknown as COutfit).equip()
       break
     default:
       break

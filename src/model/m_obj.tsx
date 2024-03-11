@@ -1,5 +1,7 @@
 import CAction from './m_action'
+import { ObjConditionData, ObjChangeData } from './m_condition'
 import { oList, iList, shopList, OnSale } from './m_data'
+import { ObjEffect } from './m_effect'
 import CPlace from './m_place'
 
 export default class CObj {
@@ -12,12 +14,14 @@ export default class CObj {
   picture: string | undefined // имя файла картинки
   countable: boolean = false // количество мб
   count: number = 0 // количество
-  condBuy = [] // условия покупки
-  condUse = [] // условия доступности
-  resUse = [] // результаты действия
+  condBuy: ObjConditionData[] = [] // условия покупки
+  condUse: ObjConditionData[] = [] // условия доступности
+  resUse: ObjChangeData[] = [] // результаты действия
 
   unlocked = false // разблокирован
   owned = false // куплен
+
+  effect: ObjEffect[] = [] // эффекты при одевании, использовании и др
 
   // объект помещается в массив метаданных
   constructor(pname: string, pcaption: string, pcomment: string) {
@@ -30,7 +34,7 @@ export default class CObj {
   }
 
   // разблокировать и на прилавок в магазин
-  // если не указан магазин - значит в инвентарь
+  // если не указан магазин - значит в инвентарь (куплено!)
   unlock(pshop: string = '', pcnt: number = 1) {
     // если не указан магазин - значит в инвентарь
     if (pshop === '') {
@@ -102,6 +106,10 @@ export default class CObj {
   sell(pshop: string, pcnt = 1): boolean {
     return false
   }
+  // применить эффекты
+  applyEffects(): void {}
+  // отменить примененные эффекты
+  unapplyEffects(): void {}
   // выполнить действие над объектом
   actionDispatch(action: string): void {
     switch (action) {

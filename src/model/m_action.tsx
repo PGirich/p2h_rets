@@ -27,6 +27,7 @@ export default class CAction extends CObj {
     if (!this.inAction()) {
       actList.push(this)
       this.actionProgress = 0
+      this.ticSucess = true
     }
     return this
   }
@@ -56,12 +57,14 @@ export default class CAction extends CObj {
     return this
   }
   apply(): boolean {
-    const res = ObjChangesApply(this.resTic)
-    this.actionProgress++
-    if (this.actionProgress >= this.actionLength){
-      this.actionProgress =0
-      ObjChangesApply(this.resUse)
+    this.ticSucess = ObjChangesApply(this.resTic)
+    if (this.ticSucess) {
+      this.actionProgress++
+      if (this.actionProgress >= this.actionLength) {
+        this.actionProgress = 0
+        ObjChangesApply(this.resUse)
+      }
     }
-    return res
+    return this.ticSucess
   }
 }

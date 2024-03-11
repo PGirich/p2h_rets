@@ -32,7 +32,7 @@ export default function VShedule() {
               max={act.actionLength}
               color="green"
             >
-              {act.caption}
+              {(act.ticSucess ? '' : 'x ') + act.caption}
             </VProgress>
             <button
               className={classes.VSheduleEntryBtn}
