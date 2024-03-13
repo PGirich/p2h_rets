@@ -3,21 +3,19 @@ import VObj from './v_obj'
 import CObj from '../model/m_obj'
 import { ObjActionTypes, useObj } from './v_obj.context'
 import classes from './v_objlist.module.css'
+import useInput from '../hooks/useinput'
 
 interface propsVObjList {
   cbGetObjList: () => Array<CObj> // получение массива объектов
   action: ObjActionTypes // действие над объектами при нажатии в списке
 }
 export default function VObjList(props: propsVObjList) {
-  const [filter, setFilter] = useState('')
+  const inpFlt = useInput('')
   const { currentPlace, actionDispatch } = useObj()
   const objList: Array<CObj> = props.cbGetObjList()
 
-  const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFilter(e.target.value.toUpperCase())
-  }
   function isFiltered(value: CObj) {
-    return value.caption.toUpperCase().includes(filter)
+    return value.caption.toUpperCase().includes(inpFlt.value)
   }
 
   return (
@@ -27,8 +25,7 @@ export default function VObjList(props: propsVObjList) {
         type="text"
         id="inputFilter"
         className="inputFilter"
-        value={filter}
-        onChange={handleFilterChange}
+        {...inpFlt}
       />
       <label> Total:{objList.length.toString()}</label>
       <br></br>
