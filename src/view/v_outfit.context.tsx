@@ -1,13 +1,15 @@
 import React, { ReactNode, useReducer } from 'react'
 import CItem from '../model/m_item'
+import { outfitList } from '../model/m_effect'
+import COutfit from '../model/m_outfit'
 
 
 interface IStateOutfitContext {
-  outfit: Array<CItem>
+  outfit: Array<COutfit|undefined>
 }
 // тип передаваемого контекста
 interface IPropsOutfitContext extends IStateOutfitContext {
-  setOutfit: (arrItem: Array<CItem>) => void
+  setOutfit: (arrItem: Array<COutfit|undefined>) => void
 }
 // создаем контекст
 const OutfitContext = React.createContext({} as IPropsOutfitContext)
@@ -22,7 +24,7 @@ const enum OutfitActionTypes {
 }
 interface IOutfitAction {
   type: OutfitActionTypes.OUTFIT_SETOUTFIT
-  arrItem: Array<CItem>
+  arrItem: Array<COutfit|undefined>
 }
 
 // обработка
@@ -40,10 +42,10 @@ const reducer = (state: IStateOutfitContext, action: IOutfitAction) => {
 export default function OutfitProvider(props: { children: ReactNode }) {
   // initial value
   const [state, dispatch] = useReducer(reducer, {
-    outfit: new Array<CItem>(),
+    outfit: outfitList,
   })
   // actions
-  const setOutfit = (arrItem: Array<CItem>) =>
+  const setOutfit = (arrItem: Array<COutfit|undefined>) =>
     dispatch({ type: OutfitActionTypes.OUTFIT_SETOUTFIT, arrItem })
 
   // element

@@ -9,7 +9,7 @@ export default function VOutfit() {
     <div className={classes.VOutfit}>
       {outfit.map((act, idx) => (
         <div className={classes.VSheduleEntryBox} key={idx}>
-              {act.caption}
+              {act!.caption}
         </div>
       ))}
     </div>

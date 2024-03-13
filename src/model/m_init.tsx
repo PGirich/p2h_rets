@@ -3,6 +3,8 @@ import CShop from './m_shop'
 import CAction from './m_action'
 import CStat from './m_stat'
 import CItem from './m_item'
+import COutfit from './m_outfit'
+import { OutfitType } from './m_effect'
 
 //////////////////////////////////////
 
@@ -100,7 +102,11 @@ export default function loadMetaData() {
   // items
 
   mo = new CItem('item_gold', 'gold', 'A heavy purse makes a light heart')
-  mo.color = 'gold'
+  mo.count = 5
+  mo.unlock()
+
+  mo = new COutfit('outfit_torn_rags', 'torn rags', 'Dirty torn rags do not keep you warm',OutfitType.OUTFIT_ROBE)
+  mo.count = 1
   mo.unlock()
 
   // ====================================================
