@@ -40,7 +40,7 @@ export const enum OutfitType {
   OUTFIT_BAG = 'bag',
 }
 // тип слотов
-export const itemSlotTypes: Array<OutfitType> = [
+export const outfitSlotTypes: Array<OutfitType> = [
     OutfitType.OUTFIT_HEAD,
     OutfitType.OUTFIT_NECK,
     OutfitType.OUTFIT_HAND,
@@ -51,4 +51,4 @@ export const itemSlotTypes: Array<OutfitType> = [
     OutfitType.OUTFIT_BAG,
 ]
 
-export const outfitList = new Array<COutfit|undefined>() // список одетых вещей
+export const outfitList = new Array<COutfit|undefined>(outfitSlotTypes.length) // список одетых вещей
