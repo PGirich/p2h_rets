@@ -1,4 +1,4 @@
-import { ObjEffect, OutfitType, itemSlotTypes, outfitList } from './m_effect'
+import { ObjEffect, OutfitType, outfitSlotTypes, outfitList } from './m_effect'
 import CItem from './m_item'
 
 export default class COutfit extends CItem {
@@ -28,12 +28,12 @@ export default class COutfit extends CItem {
     }
     // найдем подходящий слот и поместим туда объект
     const ot = this.outfitType
-    idx = itemSlotTypes.findIndex((v) => v === ot) // всегда есть миниум один слот
+    idx = outfitSlotTypes.findIndex((v) => v === ot) // всегда есть миниум один слот
     let oUnwear = outfitList[idx]
     outfitList[idx] = this
     // сместим имеющийся в сл.слот
-    while (!oUnwear && idx < itemSlotTypes.length) {
-      if (itemSlotTypes[idx] === ot) {
+    while (!oUnwear && idx < outfitSlotTypes.length) {
+      if (outfitSlotTypes[idx] === ot) {
         let o = outfitList[idx]
         outfitList[idx] = oUnwear
         oUnwear = o

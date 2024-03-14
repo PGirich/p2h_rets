@@ -44,7 +44,7 @@ const reducer = (state: IStateObjContext, action: IObjAction) => {
       return { ...state, currentPlace: action.obj as unknown as CPlace }
     case ObjActionTypes.ACTION_PERFORM:
       ;(obj as unknown as CAction).begin()
-      ;(obj as unknown as CAction).actionProgress += 1
+      //;(obj as unknown as CAction).actionProgress += 1
       break
     case ObjActionTypes.ACTION_BUY:
       obj.buy(state.currentPlace.name)
