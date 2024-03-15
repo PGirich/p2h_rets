@@ -31,7 +31,7 @@ export default function loadMetaData() {
   // places
 
   mo = new CPlace(
-    'place_innerworld',
+    'place_innerworld', //mage inner world
     'Inner world',
     'In meditation you get here everytime'
   )
@@ -62,7 +62,7 @@ export default function loadMetaData() {
     'Witch hut',
     'Local witch sells herb in her small hut',
     'place_forest'
-  ).unlock('shop')
+  ).unlock('place_forest')
 
   // stats
 
@@ -101,11 +101,20 @@ export default function loadMetaData() {
 
   // items
 
-  mo = new CItem('item_gold', 'gold', 'A heavy purse makes a light heart')
+  mo = new CItem(
+    'item_gold', // small hill of ancient gold coins on white background
+    'gold',
+    'A heavy purse makes a light heart'
+  )
   mo.count = 5
   mo.unlock()
 
-  mo = new COutfit('outfit_torn_rags', 'torn rags', 'Dirty torn rags do not keep you warm',OutfitType.OUTFIT_ROBE)
+  mo = new COutfit(
+    'outfit_torn_rags', // ancient  torn vest on white background
+    'torn rags',
+    'Dirty torn rags do not keep you warm',
+    OutfitType.OUTFIT_ROBE
+  )
   mo.count = 1
   mo.unlock()
 
@@ -119,7 +128,7 @@ export default function loadMetaData() {
   // count: количество
 
   mo = new CAction(
-    ACTION_REST,
+    ACTION_REST, // old Chinese tea set with fog on white background
     'Rest',
     'How beautiful it is to do nothing, and then rest afterward'
   )
@@ -129,7 +138,7 @@ export default function loadMetaData() {
   mo.unlock()
 
   mo = new CAction(
-    'action_cleaning',
+    'action_cleaning', // old Chinese broom on white background
     'Cleaning job',
     'You can get some charity for cleaninf street from random housewife'
   )
@@ -139,16 +148,19 @@ export default function loadMetaData() {
   mo.unlock()
 
   mo = new CAction('action_begging', 'Begging', 'Begging passersby for money')
-  mo.resTic = [{ prop: 'item_gold', add: 0.01 }, { prop: 'stat_stamina', add: -0.025 }]
+  mo.resTic = [
+    { prop: 'item_gold', add: 0.01 },
+    { prop: 'stat_stamina', add: -0.025 },
+  ]
   mo.resUse = [{ prop: 'stat_stamina', add: 1 }]
   mo.actionLength = 100
   mo.unlock()
 
   mo = new CAction(
-    'learning_reading',
+    'action_learning_reading', // old Chinese book and writing feather on white background
     'learning reading',
     'learning how to read with old teacher'
-  ).unlock('village')
+  ).unlock('place_village')
   mo.condUse = [{ prop: 'stat_filth', op: `<`, val: 1 }]
   mo.resUse = [{ prop: 'scholar', add: 0.01 }]
   mo.resTic = [{ prop: 'stat_stamina', add: 0.3 }]
