@@ -10,6 +10,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Install dependecies
         run: npm ci
+          npm install --save-dev @babel/plugin-proposal-private-property-in-object --legacy-peer-deps
       - name: Test application
         run: npm run test
       - name: List files in the repository
