@@ -2,7 +2,7 @@ name: p2h Github Actions CI/CD
 run-name: GitHub Actions for p2h
 on: [push, workflow_dispatch]
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Event ${{ github.event_name }}; Runner ${{ runner.os }}; Branch ${{ github.ref }}; Repository ${{ github.repository }}."
@@ -18,15 +18,6 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Event ${{ github.event_name }}; Runner ${{ runner.os }}; Branch ${{ github.ref }}; Repository ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - name: Install dependecies
-        run: npm ci
-          npm install --save-dev @babel/plugin-proposal-private-property-in-object --legacy-peer-deps
       - name: Build application
         run: npm run build
       - name: Deploy
