@@ -53,6 +53,6 @@ jobs:
     steps:
       - run: echo "Event ${{ github.event_name }}; Runner ${{ runner.os }}; Branch ${{ github.ref }}; Repository ${{ github.repository }}."
       - name: Get built project
-        uses: actions/download-artiact@v4
+        uses: actions/download-artifact@v4
         with:
           name: build-files
