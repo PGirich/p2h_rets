@@ -7,7 +7,7 @@ export default function VPlaceInfo() {
   return (
     <div className={classes.VPlaceInfo}>
       {currentPlace && (<>
-      <img className={classes.VPlaceInfoImg} src={currentPlace.picture} />
+      <img className={classes.VPlaceInfoImg} src={currentPlace.picture} alt="" />
       <h1>{currentPlace.caption}</h1>
       <h2>{currentPlace.comment}</h2>{' '}
       </>)}

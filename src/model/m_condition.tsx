@@ -1,5 +1,5 @@
 import CObj from './m_obj'
-import { iList, oList } from './m_data'
+import { iList } from './m_data'
 import CStat from './m_stat'
 
 // структура для указания условия
@@ -33,7 +33,7 @@ const ObjConditionCheck = (cd: ObjConditionData): boolean => {
         if (val >= cd.val) return false
         break
       default:
-        if (val != cd.val) return false
+        if (val !== cd.val) return false
     }
   } else {
     if (!cd.specfn()) return false

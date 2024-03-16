@@ -1,8 +1,8 @@
-import React, { MouseEventHandler } from 'react'
+import  { MouseEventHandler } from 'react'
 import classes from './v_shedule.module.css'
 import { useShedule } from './v_shedule.context'
 import VProgress from './v_progress'
-import { actList, oList } from '../model/m_data'
+import { actList } from '../model/m_data'
 
 export default function VShedule() {
   const { shedule, maxTasks, currentRestAction, setShedule } = useShedule()

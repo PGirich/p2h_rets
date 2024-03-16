@@ -1,4 +1,3 @@
-import { CSSProperties } from "react";
 import CObj from './m_obj'
 
 export default class CStat extends CObj {

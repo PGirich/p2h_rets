@@ -1,5 +1,4 @@
 import React, { ReactNode, useReducer } from 'react'
-import CItem from '../model/m_item'
 import { outfitList } from '../model/m_effect'
 import COutfit from '../model/m_outfit'
 

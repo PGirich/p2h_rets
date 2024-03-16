@@ -18,11 +18,12 @@ interface propsVLogFilter {
   children: ReactNode
 }
 function VLogFilter(props: propsVLogFilter) {
+  const { cbChange, ld } = props
   const cbChangeHandler: ChangeEventHandler = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      props.cbChange(props.ld)
+      cbChange(ld)
     },
-    [props.cbChange]
+    [cbChange, ld]
   )
   return (
     <>

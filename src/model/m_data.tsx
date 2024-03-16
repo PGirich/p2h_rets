@@ -1,7 +1,6 @@
 import CObj from './m_obj'
 import CAction from './m_action'
 import { ACTION_LIVE, STAT_AGE_MONTH_LENGTH } from './m_init'
-import CItem from './m_item'
 
 export interface CObjCnt {
   o: CObj

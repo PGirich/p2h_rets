@@ -1,8 +1,7 @@
-import React, { ReactNode, useContext, useEffect, useReducer } from 'react'
+import React, { ReactNode, useEffect, useReducer } from 'react'
 import { actListApply, oList } from '../model/m_data'
 import CAction from '../model/m_action'
 import {
-  ACTION_LIVE,
   ACTION_REST,
   STAT_AGE,
   STAT_AGE_REBORN,

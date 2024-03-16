@@ -1,4 +1,3 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import VObj from './v_obj'
 import CObj from '../model/m_obj'
 import { ObjActionTypes, useObj } from './v_obj.context'
@@ -11,7 +10,7 @@ interface propsVObjList {
 }
 export default function VObjList(props: propsVObjList) {
   const inpFlt = useInput('')
-  const { currentPlace, actionDispatch } = useObj()
+  const { currentPlace /*, actionDispatch*/ } = useObj()
   const objList: Array<CObj> = props.cbGetObjList()
 
   function isFiltered(value: CObj) {

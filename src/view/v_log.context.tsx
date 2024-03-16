@@ -1,13 +1,4 @@
-import React, {
-  Children,
-  ReactNode,
-  ReactPropTypes,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import React, { ReactNode, useContext, useRef, useState } from 'react'
 import CObj from '../model/m_obj'
 
 // типы логируемых данных
@@ -44,14 +35,6 @@ export const useLog = () => {
 }
 
 export default function LogProvider(props: { children: ReactNode }) {
-  // массив отражаемых в логе операций
-  const emptyLD: LogData = {
-    type: LogTypes.TYPE_ACTIONS,
-    when: Date.now(),
-    obj: undefined,
-    str: 'log cleared...',
-    val: 1,
-  }
   const arrLogData = useRef(new Array<LogData>())
   // как статус идет миллисекунда
   const [arrLogState, setArrLogState] = useState(Date.now())

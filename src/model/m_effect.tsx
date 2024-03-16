@@ -1,5 +1,4 @@
 import CObj from './m_obj'
-import CItem from './m_item'
 import COutfit from './m_outfit'
 
 ///////////////////////////////////////////

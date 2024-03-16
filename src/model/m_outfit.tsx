@@ -1,4 +1,4 @@
-import { ObjEffect, OutfitType, outfitSlotTypes, outfitList } from './m_effect'
+import { OutfitType, outfitSlotTypes, outfitList } from './m_effect'
 import CItem from './m_item'
 
 export default class COutfit extends CItem {

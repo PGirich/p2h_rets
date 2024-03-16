@@ -1,9 +1,7 @@
 import CObj from './m_obj'
 import { actList } from './m_data'
 import {
-  ObjConditionData,
   ObjChangeData,
-  ObjConditionsCheck,
   ObjChangesApply,
 } from './m_condition'
 

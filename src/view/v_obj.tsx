@@ -42,7 +42,7 @@ export default function VObj(props: propsVObj) {
       }
       onClick={handleObjOnClick}
     >
-      <img className={classes.VObjImg} src={obj.picture} />
+      <img className={classes.VObjImg} src={obj.picture} alt="" />
       <div className={classes.VObjText}>
         <h1>{obj.caption}</h1>
         <h2>{obj.comment}</h2>
