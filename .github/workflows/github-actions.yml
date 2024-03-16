@@ -8,6 +8,11 @@ jobs:
       - run: echo "Event ${{ github.event_name }}; Runner ${{ runner.os }}; Branch ${{ github.ref }}; Repository ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Cache deps
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: node-modules=${{ hashFiles('**/package-lock.json') }}
       - name: Install dependecies
         run: npm ci
           npm install --save-dev @babel/plugin-proposal-private-property-in-object --legacy-peer-deps
