@@ -13,7 +13,38 @@ jobs:
           npm install --save-dev @babel/plugin-proposal-private-property-in-object --legacy-peer-deps
       - name: Test application
         run: npm run test
+      - name: Lint application
+        run: npm run lint
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - run: echo "Job's status ${{ job.status }}"
+            test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Event ${{ github.event_name }}; Runner ${{ runner.os }}; Branch ${{ github.ref }}; Repository ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install dependecies
+        run: npm ci
+          npm install --save-dev @babel/plugin-proposal-private-property-in-object --legacy-peer-deps
+      - name: Test application
+        run: npm run test
+      - name: Lint application
+        run: npm run lint
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Event ${{ github.event_name }}; Runner ${{ runner.os }}; Branch ${{ github.ref }}; Repository ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install dependecies
+        run: npm ci
+          npm install --save-dev @babel/plugin-proposal-private-property-in-object --legacy-peer-deps
+      - name: Build application
+        run: npm run build
+      - name: Deploy
+        run: echo Deploying...
