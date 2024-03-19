@@ -110,25 +110,4 @@ export default class CObj {
   applyEffects(): void {}
   // отменить примененные эффекты
   unapplyEffects(): void {}
-  // выполнить действие над объектом
-  actionDispatch(action: string): void {
-    switch (action) {
-      case 'unlock':
-        this.unlock()
-        break
-      case 'buy':
-        this.buy(CPlace.currentPlace)
-        break
-      case 'perform':
-        if (this.type === 'action') {
-          ;(this as unknown as CAction).begin()
-        }
-        break
-      case 'travel':
-        if ((this.type = 'place')) {
-          ;(this as unknown as CPlace).travel()
-        }
-        break
-    }
-  }
 }

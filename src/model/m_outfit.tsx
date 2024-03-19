@@ -20,7 +20,7 @@ export default class COutfit extends CItem {
   equip(): void {
     // если уже одето - снимем!
     let idx = outfitList.findIndex((v) => v === this)
-    if (idx > -1) {
+    if (~idx) {
       outfitList[idx] = undefined
       this.isEquipped = false
       this.unapplyEffects()
@@ -42,7 +42,7 @@ export default class COutfit extends CItem {
     }
     // отменим эффекты непоместившейся одежды
     if (oUnwear) {
-      oUnwear.isEquipped = false
+      oUnwear. = false
       oUnwear.unapplyEffects()
     }
     // применим эффекты данной одежды

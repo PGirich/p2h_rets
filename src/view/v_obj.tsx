@@ -5,6 +5,8 @@ import { LogTypes, useLog } from './v_log.context'
 import { useShedule } from './v_shedule.context'
 import { actList } from '../model/m_data'
 import { ObjActionTypes, useObj } from './v_obj.context'
+import { useOutfit } from './v_outfit.context'
+import { outfitList } from '../model/m_effect'
 
 interface propsVObj {
   obj: CObj
@@ -12,32 +14,19 @@ interface propsVObj {
   isActive: boolean
 }
 export default function VObj(props: propsVObj) {
-  const appLog = useLog()
-  const { setShedule } = useShedule()
   const { actionDispatch } = useObj()
 
   const obj = props.obj
   if (!obj) return null
   const handleObjOnClick: MouseEventHandler = (e) => {
     actionDispatch(obj, props.action)
-    appLog.toLog({
-      type:
-        props.action === 'unlock'
-          ? LogTypes.TYPE_UNLOCK
-          : LogTypes.TYPE_ACTIONS,
-      obj: obj,
-      str: props.action,
-      when: Date.now(),
-      val: 1,
-    })
-    if (props.action === ObjActionTypes.ACTION_PERFORM) setShedule(actList)
   }
 
   return (
     <div
       className={
         props.isActive
-          ? `${classes.VObj} ${classes.VObjActive}`
+          ? `${classes.VObj} ${classes.VObjSelected}`
           : `${classes.VObj}`
       }
       onClick={handleObjOnClick}
@@ -48,9 +37,9 @@ export default function VObj(props: propsVObj) {
         <h2>{obj.comment}</h2>
         <h3>
           {obj.type}
-          {` ${obj.unlocked ? 'U' : ''} ${obj.owned ? 'O' : ''}  ${
-            obj.countable ? 'cnt:' + obj.count : 'NC'
-          } ${props.action}`}
+          {` ${obj.unlocked ? 'U' : ''} ${obj.owned ? 'O' : ''} ${
+            props.isActive ? 'A' : ''
+          } ${obj.countable ? 'cnt:' + obj.count : 'NC'} ${props.action}`}
         </h3>
       </div>
     </div>

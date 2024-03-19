@@ -27,6 +27,7 @@
 }
 .VObjSelected {
   background: #9bb0ba;
+  border: 2px dashed;
 }
 .VObjImg {
   width: 50px;
@@ -55,4 +56,3 @@
   font-weight: 100;
   line-height: normal;
 }
-

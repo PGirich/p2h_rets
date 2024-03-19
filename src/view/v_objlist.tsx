@@ -3,16 +3,34 @@ import CObj from '../model/m_obj'
 import { ObjActionTypes, useObj } from './v_obj.context'
 import classes from './v_objlist.module.css'
 import useInput from '../hooks/useinput'
+import { outfitList } from '../model/m_effect'
+import { useOutfit } from './v_outfit.context'
+import COutfit from '../model/m_outfit'
 
 interface propsVObjList {
   cbGetObjList: () => Array<CObj> // получение массива объектов
   action: ObjActionTypes // действие над объектами при нажатии в списке
 }
 export default function VObjList(props: propsVObjList) {
-  const inpFlt = useInput('')
   const { currentPlace /*, actionDispatch*/ } = useObj()
+  const { outfit } = useOutfit()
   const objList: Array<CObj> = props.cbGetObjList()
 
+  // hilight selected object
+  let objIsActive: (o: CObj) => boolean // функция для определения активности объекта
+  switch (props.action) {
+    case ObjActionTypes.ACTION_TRAVEL:
+      objIsActive = (o: CObj) => o.name === currentPlace.name
+      break
+    case ObjActionTypes.ACTION_EQUIP:
+      objIsActive = (o: CObj) => outfit.includes(o as unknown as COutfit)
+      break
+    default:
+      objIsActive = (o: CObj) => false
+  }
+
+  // filtering by obj name
+  const inpFlt = useInput('')
   function isFiltered(value: CObj) {
     return value.caption.toUpperCase().includes(inpFlt.value)
   }
@@ -20,12 +38,7 @@ export default function VObjList(props: propsVObjList) {
   return (
     <div className={classes.VObjList}>
       <label htmlFor="inputFilter">Filter:</label>
-      <input
-        type="text"
-        id="inputFilter"
-        className="inputFilter"
-        {...inpFlt}
-      />
+      <input type="text" id="inputFilter" className="inputFilter" {...inpFlt} />
       <label> Total:{objList.length.toString()}</label>
       <br></br>
       {Array.from(objList.values())
@@ -35,7 +48,7 @@ export default function VObjList(props: propsVObjList) {
             key={o.name}
             obj={o}
             action={props.action}
-            isActive={o.name === currentPlace.name}
+            isActive={objIsActive(o)}
           />
         ))}
     </div>

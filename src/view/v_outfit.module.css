@@ -1,7 +1,7 @@
-VOutfit {
-    border: dotted 1px black;
-    margin: 2px;
+.VOutfit {
+  border: dotted 1px black;
+  margin: 2px;
 }
-VOutfitEntryBox {
-    border: solid 1px black;
+.VOutfitEntryBox {
+  border: solid 1px black;
 }
