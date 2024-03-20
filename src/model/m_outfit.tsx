@@ -42,7 +42,7 @@ export default class COutfit extends CItem {
     }
     // отменим эффекты непоместившейся одежды
     if (oUnwear) {
-      oUnwear. = false
+      oUnwear.isEquipped = false
       oUnwear.unapplyEffects()
     }
     // применим эффекты данной одежды

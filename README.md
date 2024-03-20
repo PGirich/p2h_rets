@@ -1,6 +1,9 @@
 npx create-react-app typescript-mobx-react --template typescript
-npm i mobx-react // mobx-react-lite!
 npm i --save-dev typescript @types/node @types/react @types/react-dom @types/jest
+npm i styled-components
+npm install eslint --global
+npm i mobx-react-lite
+npm i mobx
 
 ====================================
 # Getting Started with Create React App

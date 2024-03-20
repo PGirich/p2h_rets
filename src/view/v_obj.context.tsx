@@ -5,10 +5,10 @@ import CPlace from '../model/m_place'
 import CObj from '../model/m_obj'
 import { PLACE_VILLAGE } from '../model/m_init'
 import COutfit from '../model/m_outfit'
-import { LogTypes, useLog } from './v_log.context'
 import { outfitList } from '../model/m_effect'
 import { useShedule } from './v_shedule.context'
 import { useOutfit } from './v_outfit.context'
+import { LoggedEventTypes, useGameState } from '../model/store.gamestate'
 
 // тип состояния
 interface IStateObjContext {
@@ -41,7 +41,7 @@ interface IObjAction {
 
 // обработка
 const reducer = (state: IStateObjContext, action: IObjAction) => {
-  const { toLog } = useLog()
+  const gameState = useGameState()
   const { setShedule } = useShedule()
   const { setOutfit } = useOutfit()
 
@@ -70,16 +70,13 @@ const reducer = (state: IStateObjContext, action: IObjAction) => {
     default:
       break
   }
-  toLog({
-    type:
-      aType === ObjActionTypes.ACTION_UNLOCK
-        ? LogTypes.TYPE_UNLOCK
-        : LogTypes.TYPE_ACTIONS,
-    obj: obj,
-    str: aType,
-    when: Date.now(),
-    val: 1,
-  })
+  gameState.toLog(
+    aType === ObjActionTypes.ACTION_UNLOCK
+      ? LoggedEventTypes.LOGGED_UNLOCK
+      : LoggedEventTypes.LOGGED_ACTIONS,
+    aType,
+    obj
+  )
   if (aType === ObjActionTypes.ACTION_PERFORM) setShedule(actList)
   if (aType === ObjActionTypes.ACTION_EQUIP) setOutfit(outfitList)
   return state

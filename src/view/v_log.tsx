@@ -7,14 +7,19 @@ import {
   useCallback,
 } from 'react'
 import classes from './v_log.module.css'
-import { LogData, LogTypes, useLog } from './v_log.context'
+import {
+  LogEvent,
+  LoggedEventTypes,
+  useGameState,
+} from '../model/store.gamestate'
+import { observer } from 'mobx-react-lite'
 
 //=========================================
 // чекбокс меняет состояние фильтра журнала
 interface propsVLogFilter {
-  ld: LogTypes
+  ld: LoggedEventTypes
   value: boolean
-  cbChange: (ld: LogTypes) => void
+  cbChange: (le: LoggedEventTypes) => void
   children: ReactNode
 }
 function VLogFilter(props: propsVLogFilter) {
@@ -41,53 +46,47 @@ function VLogFilter(props: propsVLogFilter) {
 
 //=========================================
 // компонент журнала
-export default function VLog() {
-  const appLog = useLog()
+export const VLog = observer(() => {
+  const gameState = useGameState()
 
+  // состояния фильтра журнала
+  const aLoggedEventTypes = [
+    LoggedEventTypes.LOGGED_ACTIONS,
+    LoggedEventTypes.LOGGED_LOOT,
+    LoggedEventTypes.LOGGED_UNLOCK,
+    LoggedEventTypes.LOGGED_BATTLE,
+  ]
   // фильтры по типам операций
-  const [logTypesToHide, setLogTypesToHide] = useState(
-    new Set<LogTypes>([
-      LogTypes.TYPE_ACTIONS,
-      LogTypes.TYPE_LOOT,
-      LogTypes.TYPE_UNLOCK,
-      LogTypes.TYPE_BATTLE,
-    ])
+  const [evTypesToHide, setEvTypesToHide] = useState(
+    new Set<LoggedEventTypes>(aLoggedEventTypes)
   )
+  // toggle filter
+  function toggleEvTypes(set: Set<LoggedEventTypes>, v: LoggedEventTypes) {
+    set.has(v) ? set.delete(v) : set.add(v)
+    return set
+  }
+  // изменение фильтра
+  const cbChangeFilter = (et: LoggedEventTypes) => {
+    setEvTypesToHide((etth) => {
+      const clone = new Set(etth)
+      return toggleEvTypes(clone, et)
+    })
+  }
 
   // преставление операции для журнала
-  function logDataToStr(ld: LogData): string {
+  function logDataToStr(ld: LogEvent): string {
     return (
       new Date(ld.when).toLocaleString() +
       ': ' +
       (ld.obj ? '[' + ld.obj.caption + '] ' : '') +
       ld.str +
-      (ld.val > 1 ? ' (' + ld.val + ')' : '')
+      (ld.count > 1 ? ' (' + ld.count + ')' : '')
     )
   }
 
   // очистка логов
   const btClearClickHandler: MouseEventHandler = (e) => {
-    const emptyLD: LogData = {
-      type: LogTypes.TYPE_ACTIONS,
-      when: Date.now(),
-      obj: undefined,
-      str: 'log cleared...',
-      val: 1,
-    }
-    appLog.arr!.current = new Array<LogData>()
-    appLog.toLog(emptyLD)
-  }
-  // toggle filter
-  function toggleLogTypes(set: Set<LogTypes>, v: LogTypes) {
-    set.has(v) ? set.delete(v) : set.add(v)
-    return set
-  }
-  // изменение фильтра
-  const cbChangeFilter = (ld: LogTypes) => {
-    setLogTypesToHide((ltth) => {
-      const clone = new Set(ltth)
-      return toggleLogTypes(clone, ld)
-    })
+    gameState.toLog(LoggedEventTypes.LOGGED_ACTIONS, 'log cleared...')
   }
 
   return (
@@ -95,48 +94,31 @@ export default function VLog() {
       <button
         className="button"
         onClick={btClearClickHandler}
-        disabled={appLog.arr!.current.length === 0}
+        disabled={gameState.log.length === 0}
       >
         CLEAR
       </button>
+      {aLoggedEventTypes.map((et) => (
+        <VLogFilter
+          key={et}
+          ld={et}
+          value={evTypesToHide.has(et)}
+          cbChange={cbChangeFilter}
+        >
+          {et}
+        </VLogFilter>
+      ))}
 
-      <VLogFilter
-        ld={LogTypes.TYPE_ACTIONS}
-        cbChange={cbChangeFilter}
-        value={logTypesToHide.has(LogTypes.TYPE_ACTIONS)}
-      >
-        actions
-      </VLogFilter>
-
-      <VLogFilter
-        ld={LogTypes.TYPE_LOOT}
-        cbChange={cbChangeFilter}
-        value={logTypesToHide.has(LogTypes.TYPE_LOOT)}
-      >
-        loot
-      </VLogFilter>
-      <VLogFilter
-        ld={LogTypes.TYPE_UNLOCK}
-        cbChange={cbChangeFilter}
-        value={logTypesToHide.has(LogTypes.TYPE_UNLOCK)}
-      >
-        unlock
-      </VLogFilter>
-      <VLogFilter
-        ld={LogTypes.TYPE_BATTLE}
-        cbChange={cbChangeFilter}
-        value={logTypesToHide.has(LogTypes.TYPE_BATTLE)}
-      >
-        battle
-      </VLogFilter>
-      <div key={'log'}>Log at {new Date(appLog.state).toLocaleString()}</div>
-      {appLog
-        .arr!.current.filter((ld) => logTypesToHide.has(ld.type))
-        .map((ld, idx) => (
+      <div key={'log'}>
+        Log at {new Date(gameState.currentTime).toLocaleString()}
+      </div>
+      {gameState.log
+        .filter((le) => evTypesToHide.has(le.type))
+        .map((le, idx) => (
           <div key={idx} className={classes.VLogEntry}>
-            {logDataToStr(ld)}
+            {logDataToStr(le)}
           </div>
         ))}
     </div>
   )
-}
+})

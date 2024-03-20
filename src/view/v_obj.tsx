@@ -1,12 +1,7 @@
 import { MouseEventHandler } from 'react'
 import CObj from '../model/m_obj'
 import classes from './v_obj.module.css'
-import { LogTypes, useLog } from './v_log.context'
-import { useShedule } from './v_shedule.context'
-import { actList } from '../model/m_data'
 import { ObjActionTypes, useObj } from './v_obj.context'
-import { useOutfit } from './v_outfit.context'
-import { outfitList } from '../model/m_effect'
 
 interface propsVObj {
   obj: CObj
