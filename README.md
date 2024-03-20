@@ -1,3 +1,8 @@
+npx create-react-app typescript-mobx-react --template typescript
+npm i mobx-react // mobx-react-lite!
+npm i --save-dev typescript @types/node @types/react @types/react-dom @types/jest
+
+====================================
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
