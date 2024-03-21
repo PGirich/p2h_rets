@@ -13,8 +13,8 @@ export default class CPlace extends CObj {
     this.type = 'place'
     this.location = plocation
   }
-  travel(): CPlace {
+  travel(): boolean {
     CPlace.currentPlace = this.name
-    return this
+    return true
   }
 }

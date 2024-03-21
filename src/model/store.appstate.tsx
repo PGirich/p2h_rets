@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react'
 import { makeAutoObservable } from 'mobx'
-import { observer } from 'mobx-react-lite'
-import { ObjActionTypes } from '../view/v_obj.context'
+import { ObjActionTypes } from './store.reducer'
 
 // type definition
 export const enum AppStates {

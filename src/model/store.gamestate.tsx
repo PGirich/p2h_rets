@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react'
 import { action, makeAutoObservable, observable } from 'mobx'
-import { observer } from 'mobx-react-lite'
 import { oList } from './m_data'
 import { PLACE_VILLAGE } from './m_init'
 import CPlace from './m_place'
 import CObj from './m_obj'
+import { objActionReducer, ObjActionTypes } from './store.reducer'
 
 // type definition
 // типы логируемых данных
@@ -25,6 +25,7 @@ export interface LogEvent {
 
 // data model
 export class GameState {
+  actionDispatch: (action: ObjActionTypes, obj: CObj) => boolean // action dispatch function
   currentPlace: CPlace // selected place define environment
   currentTime: number // current time of game
   log: LogEvent[]
@@ -34,7 +35,9 @@ export class GameState {
       currentTime: observable,
       log: observable,
       toLog: action,
+      actionDispatch: observable,
     })
+    this.actionDispatch = objActionReducer
     this.currentPlace = oList.get(PLACE_VILLAGE) as CPlace
     this.currentTime = Date.now()
     this.log = []
@@ -54,6 +57,8 @@ export class GameState {
   }
 }
 
+export const globalGameState = new GameState()
+
 // создаем контекст
 const GameStateContext = React.createContext<GameState>({} as GameState)
 export const useGameState = () => {
@@ -64,7 +69,7 @@ export const useGameState = () => {
 // создаем провайдер для оборачивания функ компонента
 export default function GameStateProvider(props: { children: ReactNode }) {
   return (
-    <GameStateContext.Provider value={new GameState()}>
+    <GameStateContext.Provider value={globalGameState}>
       {props.children}
     </GameStateContext.Provider>
   )

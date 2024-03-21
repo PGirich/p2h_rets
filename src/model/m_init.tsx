@@ -41,28 +41,30 @@ export default function loadMetaData() {
     PLACE_VILLAGE,
     'Small village',
     'Small village, in the far edge of the world'
-  ).unlock()
+  )
+  mo.unlock()
 
-  mo = new CPlace(
-    'place_forest',
-    'Forest',
-    'Forest near small village'
-  ).unlock()
-  mo = new CPlace('place_river', 'River', 'River near small village').unlock()
-  mo = new CPlace('place_mount', 'Mount', 'Mount near small village').unlock()
+  mo = new CPlace('place_forest', 'Forest', 'Forest near small village')
+  mo.unlock()
+  mo = new CPlace('place_river', 'River', 'River near small village')
+  mo.unlock()
+  mo = new CPlace('place_mount', 'Mount', 'Mount near small village')
+  mo.unlock()
 
   mo = new CShop(
     'shop_villageshop',
     'Village trader',
     'Local trader sells junk to fellow peasants',
     'place_villageshop'
-  ).unlock()
+  )
+  mo.unlock()
   mo = new CShop(
     'shop_witchshop',
     'Witch hut',
     'Local witch sells herb in her small hut',
     'place_forest'
-  ).unlock('place_forest')
+  )
+  mo.unlock('place_forest')
 
   // stats
 
@@ -160,11 +162,12 @@ export default function loadMetaData() {
     'action_learning_reading', // old Chinese book and writing feather on white background
     'learning reading',
     'learning how to read with old teacher'
-  ).unlock('place_village')
+  )
   mo.condUse = [{ prop: 'stat_filth', op: `<`, val: 1 }]
   mo.resUse = [{ prop: 'scholar', add: 0.01 }]
   mo.resTic = [{ prop: 'stat_stamina', add: 0.3 }]
   mo.actionLength = 200
+  mo.unlock('place_village')
 
   console.log('Metadata loaded.')
 }

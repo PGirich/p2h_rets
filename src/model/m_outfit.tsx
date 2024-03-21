@@ -17,14 +17,14 @@ export default class COutfit extends CItem {
     this.isEquipped = false
   }
   // одеть
-  equip(): void {
+  equip(): boolean {
     // если уже одето - снимем!
     let idx = outfitList.findIndex((v) => v === this)
     if (~idx) {
       outfitList[idx] = undefined
       this.isEquipped = false
       this.unapplyEffects()
-      return
+      return false
     }
     // найдем подходящий слот и поместим туда объект
     const ot = this.outfitType
@@ -48,5 +48,6 @@ export default class COutfit extends CItem {
     // применим эффекты данной одежды
     this.isEquipped = true
     this.applyEffects()
+    return true
   }
 }

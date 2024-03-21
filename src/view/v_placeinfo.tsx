@@ -1,16 +1,23 @@
 import classes from './v_placeinfo.module.css'
-import { useObj } from './v_obj.context'
+import { useGameState } from '../model/store.gamestate'
+import { observer } from 'mobx-react-lite'
 
-export default function VPlaceInfo() {
-  const { currentPlace } = useObj()
-  
+export const VPlaceInfo = observer(() => {
+  const gameState = useGameState()
+
   return (
     <div className={classes.VPlaceInfo}>
-      {currentPlace && (<>
-      <img className={classes.VPlaceInfoImg} src={currentPlace.picture} alt="" />
-      <h1>{currentPlace.caption}</h1>
-      <h2>{currentPlace.comment}</h2>{' '}
-      </>)}
+      {gameState.currentPlace && (
+        <>
+          <img
+            className={classes.VPlaceInfoImg}
+            src={gameState.currentPlace.picture}
+            alt=""
+          />
+          <h1>{gameState.currentPlace.caption}</h1>
+          <h2>{gameState.currentPlace.comment}</h2>{' '}
+        </>
+      )}
     </div>
   )
-}
+})

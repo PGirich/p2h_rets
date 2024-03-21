@@ -1,18 +1,18 @@
 import VObj from './v_obj'
 import CObj from '../model/m_obj'
-import { ObjActionTypes, useObj } from './v_obj.context'
+import { ObjActionTypes } from '../model/store.reducer'
 import classes from './v_objlist.module.css'
 import useInput from '../hooks/useinput'
-import { outfitList } from '../model/m_effect'
 import { useOutfit } from './v_outfit.context'
 import COutfit from '../model/m_outfit'
+import { useGameState } from '../model/store.gamestate'
 
 interface propsVObjList {
   cbGetObjList: () => Array<CObj> // получение массива объектов
   action: ObjActionTypes // действие над объектами при нажатии в списке
 }
 export default function VObjList(props: propsVObjList) {
-  const { currentPlace /*, actionDispatch*/ } = useObj()
+  const gameState = useGameState()
   const { outfit } = useOutfit()
   const objList: Array<CObj> = props.cbGetObjList()
 
@@ -20,7 +20,7 @@ export default function VObjList(props: propsVObjList) {
   let objIsActive: (o: CObj) => boolean // функция для определения активности объекта
   switch (props.action) {
     case ObjActionTypes.ACTION_TRAVEL:
-      objIsActive = (o: CObj) => o.name === currentPlace.name
+      objIsActive = (o: CObj) => o === gameState.currentPlace
       break
     case ObjActionTypes.ACTION_EQUIP:
       objIsActive = (o: CObj) => outfit.includes(o as unknown as COutfit)

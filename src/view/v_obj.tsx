@@ -1,7 +1,8 @@
 import { MouseEventHandler } from 'react'
 import CObj from '../model/m_obj'
 import classes from './v_obj.module.css'
-import { ObjActionTypes, useObj } from './v_obj.context'
+import { ObjActionTypes } from '../model/store.reducer'
+import { useGameState } from '../model/store.gamestate'
 
 interface propsVObj {
   obj: CObj
@@ -9,12 +10,12 @@ interface propsVObj {
   isActive: boolean
 }
 export default function VObj(props: propsVObj) {
-  const { actionDispatch } = useObj()
+  const gameState = useGameState()
 
   const obj = props.obj
   if (!obj) return null
   const handleObjOnClick: MouseEventHandler = (e) => {
-    actionDispatch(obj, props.action)
+    gameState.actionDispatch(props.action, obj)
   }
 
   return (

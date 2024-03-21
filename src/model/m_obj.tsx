@@ -42,7 +42,7 @@ export default class CObj {
       iList.set(this.name, this)
       this.unlocked = true
       this.owned = true
-      return this
+      return true
     }
     // нет прилавка - создадим
     let shop = shopList.get(pshop)
@@ -60,22 +60,23 @@ export default class CObj {
     }
     shop!.set(this.name, objCnt)
     this.unlocked = true
-    return this
+    return true
   }
   // убрать с прилавка магазина
   lock(pshop: string = '') {
-    // если не указан магазин - значит в инвентарь
+    // если не указан магазин - значит в инвентаре
     if (pshop === '') {
       this.count = 0
       iList.delete(this.name)
       this.unlocked = false
       this.owned = false
-      return this
+      return true
     }
     // удаляем из магазина, но не из инвентаря!
     const shop = shopList.get(pshop)
-    if (!shop) return this
+    if (!shop) return false
     shop.delete(this.name)
+    return true
   }
   // купить
   buy(pshop: string, pcnt = 1): boolean {
