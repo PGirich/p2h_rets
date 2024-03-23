@@ -1,8 +1,6 @@
-import CAction from './m_action'
 import { ObjConditionData, ObjChangeData } from './m_condition'
 import { oList, iList, shopList, OnSale } from './m_data'
 import { ObjEffect } from './m_effect'
-import CPlace from './m_place'
 
 export default class CObj {
   type: string // тип объекта: shop - магазин, map - карта локаций, loot - поле боя,
