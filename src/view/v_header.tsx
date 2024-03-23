@@ -1,10 +1,24 @@
+import { ReactElement, ReactNode } from 'react'
 import classes from './v_header.module.css'
+import { AppState, useAppState } from '../model/store.appstate'
+import { VTabsSection } from './v_tabssection'
+import { observer } from 'mobx-react-lite'
 
-export default function VHeader() {
+export const VHeader: () => ReactElement = observer(() => {
+  const appState = useAppState()
   return (
-    <header className={classes.VHeader}>
-      <img id="img.dragon" alt="" className={classes.VHeaderImg} src={'./img.dragon.png'}  width="50px" />
-      <div className={classes.VHeaderSpan}>Path to<br></br>Heaven<h5>ver.0.1</h5></div>
+    <header className={"wrapperH "+classes.VHeader}>
+      <img
+        id="img.dragon"
+        alt=""
+        className={"headerIcon "+classes.VHeaderImg}
+        src={'./img.dragon.png'}
+        width="50px"
+      />
+      <h1>Path to Heaven</h1>
+      <h2>ver.{appState.version}</h2>
+      <br></br>
+      <VTabsSection />
     </header>
   )
-}
+})

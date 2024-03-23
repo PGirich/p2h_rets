@@ -1,21 +1,23 @@
-import  { MouseEventHandler } from 'react'
+import { MouseEventHandler, ReactElement } from 'react'
 import classes from './v_shedule.module.css'
-import { useShedule } from './v_shedule.context'
 import VProgress from './v_progress'
 import { actList } from '../model/m_data'
+import { useGameState } from '../model/store.gamestate'
+import { observer } from 'mobx-react-lite'
 
-export default function VShedule() {
-  const { shedule, maxTasks, currentRestAction, setShedule } = useShedule()
+export const VShedule: () => ReactElement = observer(() => {
+  const gameState = useGameState()
 
   const btRestClickHandler: MouseEventHandler = (e) => {
-    currentRestAction.begin()
-    setShedule(actList)
+    gameState.currentRestAction.begin()
+    gameState.shedule = actList
   }
 
   return (
     <div className={classes.VShedule}>
       <span>
-        On shedule:{shedule.length.toString()}/{maxTasks}
+        On shedule:{gameState.shedule.length.toString()}/
+        {gameState.sheduleMaxTasks}
       </span>
       <button className={classes.VSheduleButton} onClick={btRestClickHandler}>
         REST
@@ -24,7 +26,7 @@ export default function VShedule() {
         FOCUS
       </button>
       <br></br>
-      {shedule.map((act, idx) => (
+      {gameState.shedule.map((act, idx) => (
         <div className={classes.VSheduleEntryBox} key={idx}>
           <div className={classes.VSheduleEntryBtns}>
             <VProgress
@@ -38,7 +40,7 @@ export default function VShedule() {
               className={classes.VSheduleEntryBtn}
               onClick={() => {
                 act.end()
-                setShedule(actList)
+                gameState.shedule = actList
               }}
             >
               stop
@@ -47,7 +49,7 @@ export default function VShedule() {
               className={classes.VSheduleEntryBtn}
               onClick={() => {
                 act.up()
-                setShedule(actList)
+                gameState.shedule = actList
               }}
             >
               up
@@ -56,7 +58,7 @@ export default function VShedule() {
               className={classes.VSheduleEntryBtn}
               onClick={() => {
                 act.down()
-                setShedule(actList)
+                gameState.shedule = actList
               }}
             >
               down
@@ -66,4 +68,4 @@ export default function VShedule() {
       ))}
     </div>
   )
-}
+})

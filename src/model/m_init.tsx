@@ -5,6 +5,9 @@ import CStat from './m_stat'
 import CItem from './m_item'
 import COutfit from './m_outfit'
 import { OutfitType } from './m_effect'
+import { globalGameState } from './store.gamestate'
+import { oList } from './m_data'
+import { wait } from '@testing-library/user-event/dist/utils'
 
 //////////////////////////////////////
 
@@ -168,6 +171,11 @@ export default function loadMetaData() {
   mo.resTic = [{ prop: 'stat_stamina', add: 0.3 }]
   mo.actionLength = 200
   mo.unlock('place_village')
+
+  globalGameState.setCurrentPlace(
+    oList.get(PLACE_VILLAGE)! as unknown as CPlace
+  )
+  globalGameState.setCurrentRestAction(oList.get(ACTION_REST)! as CAction)
 
   console.log('Metadata loaded.')
 }

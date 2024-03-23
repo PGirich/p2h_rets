@@ -1,16 +1,19 @@
 import classes from './v_outfit.module.css'
-import { useOutfit } from './v_outfit.context'
 import { outfitSlotTypes } from '../model/m_effect'
+import { useGameState } from '../model/store.gamestate'
+import { ReactElement } from 'react'
+import { observer } from 'mobx-react-lite'
 
-export default function VOutfit() {
-  const { outfit /*, setOutfit*/ } = useOutfit()
+export const VOutfit: () => ReactElement = observer(() => {
+  const gameState = useGameState()
   return (
     <div className={classes.VOutfit}>
       {outfitSlotTypes.map((slotType, idx) => (
         <div className={classes.VOutfitEntryBox} key={idx}>
-          {slotType}: {(outfit[idx]) ? outfit[idx]!.caption : 'no item'}
+          {slotType}:{' '}
+          {gameState.outfit[idx] ? gameState.outfit[idx]!.caption : 'no item'}
         </div>
       ))}
     </div>
   )
-}
+})

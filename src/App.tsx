@@ -1,105 +1,53 @@
-import { useState } from 'react'
 import './App.css'
-import VHeader from './view/v_header'
+import { VHeader } from './view/v_header'
 import { VPlaceInfo } from './view/v_placeinfo'
-import VShedule from './view/v_shedule'
-import VObjList from './view/v_objlist'
-import VTabsSection from './view/v_tabssection'
-import { iList, oList } from './model/m_data'
+import { VShedule } from './view/v_shedule'
+import { iList } from './model/m_data'
 import { VLog } from './view/v_log'
-import SheduleProvider from './view/v_shedule.context'
-import { ObjActionTypes } from './model/store.reducer'
-import VStatList from './view/v_statlist'
-import OutfitProvider from './view/v_outfit.context'
-import VOutfit from './view/v_outfit'
+import { VStatList } from './view/v_statlist'
 import AppStateProvider from './model/store.appstate'
 import GameStateProvider from './model/store.gamestate'
+import { VActiveTab } from './view/v_activetab'
 
 export default function App() {
-  const [currentTab, setCurrentTab] = useState('perform')
   return (
     <AppStateProvider>
       <GameStateProvider>
-        <OutfitProvider>
-          <SheduleProvider>
-            <div className="App">
-              {/* заголовок */}
-              <VHeader />
-              <VTabsSection
-                currentTab={currentTab}
-                tabs={[
-                  ObjActionTypes.ACTION_TRAVEL,
-                  ObjActionTypes.ACTION_BUY,
-                  ObjActionTypes.ACTION_PERFORM,
-                  ObjActionTypes.ACTION_EQUIP,
-                ]}
-                onChange={(tab: string) => setCurrentTab(tab)}
+        <div className="App">
+          {/* заголовок */}
+          <VHeader />
+          <div className="wrapper">
+            {/* панель состояния*/}
+            <div className="wrapperL">
+              {/* описание местонахождения */}
+              <VPlaceInfo />
+              {/* запланированные действия */}
+              <VShedule />
+              {/* статы */}
+              <VStatList
+                cbGetObjList={() =>
+                  Array.from(iList.values()).filter((o) => o.type === 'stat')
+                }
               />
-              <div className="clearfix" />
-              <main className="wrapper">
-                <div className="wrapperCenter">
-                  {/* текущие объекты */}
-                  {currentTab === ObjActionTypes.ACTION_TRAVEL && (
-                    <VObjList
-                      cbGetObjList={() =>
-                        Array.from(iList.values()).filter(
-                          (o) => o.type === 'place'
-                        )
-                      }
-                      action={ObjActionTypes.ACTION_TRAVEL}
-                    />
-                  )}
-                  {currentTab === ObjActionTypes.ACTION_BUY && (
-                    <VObjList
-                      cbGetObjList={() =>
-                        Array.from(oList.values()).filter((o) => !o.unlocked)
-                      }
-                      action={ObjActionTypes.ACTION_BUY}
-                    />
-                  )}{' '}
-                  {currentTab === ObjActionTypes.ACTION_PERFORM && (
-                    <VObjList
-                      cbGetObjList={() =>
-                        Array.from(iList.values()).filter(
-                          (o) => o.type === 'action'
-                        )
-                      }
-                      action={ObjActionTypes.ACTION_PERFORM}
-                    />
-                  )}
-                  {currentTab === ObjActionTypes.ACTION_EQUIP && (
-                    <>
-                      <VOutfit />
-                      <VObjList
-                        cbGetObjList={() =>
-                          Array.from(iList.values()).filter(
-                            (o) => o.type === 'outfit'
-                          )
-                        }
-                        action={ObjActionTypes.ACTION_EQUIP}
-                      />
-                    </>
-                  )}
-                </div>
-                <div className="wrapperRight">
-                  {/* описание местонахождения */}
-                  <VPlaceInfo />
-                  {/* запланированные действия */}
-                  <VShedule />
-                  {/* статы */}
-                  <VStatList
-                    cbGetObjList={() =>
-                      Array.from(iList.values()).filter(
-                        (o) => o.type === 'stat'
-                      )
-                    }
-                  />
-                  <VLog />
-                </div>
-              </main>
             </div>
-          </SheduleProvider>
-        </OutfitProvider>
+            {/* содержание завиит от вкладки */}
+            <div className="wrapperC">
+              <VActiveTab />
+            </div>
+            {/* журнал */}
+            <div className="wrapperR">
+              <VLog />
+              <>
+                <h1> Text h1</h1>
+                <h2> Text h2</h2>
+                <h3> Text h3</h3>
+                <h4> Text h4</h4>
+                <h5> Text h5</h5>
+                <h6> Text h6</h6>
+              </>
+            </div>
+          </div>
+        </div>
       </GameStateProvider>
     </AppStateProvider>
   )

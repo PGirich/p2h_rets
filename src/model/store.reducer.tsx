@@ -3,6 +3,8 @@ import CPlace from './m_place'
 import CObj from './m_obj'
 import COutfit from './m_outfit'
 import { globalGameState, LoggedEventTypes } from './store.gamestate'
+import { outfitList } from './m_effect'
+import { actList } from './m_data'
 
 // действия диспетчера
 export const enum ObjActionTypes {
@@ -21,10 +23,11 @@ export const objActionReducer = (action: ObjActionTypes, obj: CObj) => {
   switch (action) {
     case ObjActionTypes.ACTION_TRAVEL:
       res = (obj as unknown as CPlace).travel()
-      if (res) state.currentPlace = obj as unknown as CPlace
+      if (res) state.setCurrentPlace(obj as unknown as CPlace)
       break
     case ObjActionTypes.ACTION_PERFORM:
       res = (obj as unknown as CAction).begin()
+      state.shedule = actList
       break
     case ObjActionTypes.ACTION_BUY:
       res = obj.buy(state.currentPlace.name)
@@ -37,6 +40,7 @@ export const objActionReducer = (action: ObjActionTypes, obj: CObj) => {
       break
     case ObjActionTypes.ACTION_EQUIP:
       res = (obj as unknown as COutfit).equip()
+      state.outfit = outfitList
       break
     default:
       res = false

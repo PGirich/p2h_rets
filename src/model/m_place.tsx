@@ -1,7 +1,6 @@
 import CObj from './m_obj'
 
 export default class CPlace extends CObj {
-  static currentPlace: string = ''
   location: string
   constructor(
     pname: string,
@@ -14,7 +13,6 @@ export default class CPlace extends CObj {
     this.location = plocation
   }
   travel(): boolean {
-    CPlace.currentPlace = this.name
     return true
   }
 }

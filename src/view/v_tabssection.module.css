@@ -1,9 +1,3 @@
 .VTabsSection {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  min-width: 220px;
-  vertical-align: top;
   margin: 2px;
-  border: dotted 1px gray;
 }

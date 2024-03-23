@@ -14,8 +14,8 @@ export const VPlaceInfo = observer(() => {
             src={gameState.currentPlace.picture}
             alt=""
           />
-          <h1>{gameState.currentPlace.caption}</h1>
-          <h2>{gameState.currentPlace.comment}</h2>{' '}
+          <h2>{gameState.currentPlace.caption}</h2>
+          <h3>{gameState.currentPlace.comment}</h3>{' '}
         </>
       )}
     </div>

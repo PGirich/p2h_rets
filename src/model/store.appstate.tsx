@@ -4,26 +4,43 @@ import { ObjActionTypes } from './store.reducer'
 
 // type definition
 export const enum AppStates {
-  APP_STARTING = 'starting', // prepare metadata
-  APP_LOADING = 'loading', // loading saved data
+  APP_STARTING = 'starting', // waiting for start options 
+  APP_LOADING = 'loading', // loading metadata, saved data
+  APP_WAITING = 'waiting', // waiting for begin game
   APP_PAUSE = 'on pause', // service screen
   APP_ACTIVE = 'active', // game running
 }
 
 // data model
 export class AppState {
+  version: string 
   state: AppStates // game state
   isObjHidingMode: boolean // hiding controls mode
   currentTab: ObjActionTypes // current tab
+  tabs: ObjActionTypes[]
   constructor() {
     makeAutoObservable(this)
+    this.version = '0.1'
     this.state = AppStates.APP_STARTING // game state
     this.isObjHidingMode = false // hiding controls mode
     this.currentTab = ObjActionTypes.ACTION_TRAVEL // current tab
+    this.tabs = [
+      ObjActionTypes.ACTION_TRAVEL,
+      ObjActionTypes.ACTION_BUY,
+      ObjActionTypes.ACTION_PERFORM,
+      ObjActionTypes.ACTION_EQUIP,
+    ]
+  }
+  setAppState(state: AppStates) {
+    this.state = state
+  }
+  setCurrentTab(tab: ObjActionTypes) {
+    this.currentTab = tab
   }
 }
 
-//export const appState : AppState = new AppState() - плохо для юнит тестирования?
+export const globalAppState : AppState = new AppState() //- плохо для юнит тестирования?
+
 // создаем контекст
 const AppStateContext = React.createContext<AppState>({} as AppState)
 export const useAppState = () => {
@@ -35,7 +52,7 @@ export const useAppState = () => {
 // создаем провайдер для оборачивания функ компонента
 export default function AppStateProvider(props: { children: ReactNode }) {
   return (
-    <AppStateContext.Provider value={new AppState()}>
+    <AppStateContext.Provider value={globalAppState}>
       {props.children}
     </AppStateContext.Provider>
   )
