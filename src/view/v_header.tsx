@@ -10,7 +10,7 @@ export const VHeader: () => ReactElement = observer(() => {
     <header className={'wrapperH ' + classes.VHeader}>
       <img
         id="img.dragon"
-        alt=""
+        alt="dragon icon"
         className={'headerIcon ' + classes.VHeaderImg}
         src={'./img.dragon.png'}
         width="50px"

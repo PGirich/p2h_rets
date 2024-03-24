@@ -9,7 +9,7 @@ export const VTabsSection: () => ReactElement = observer(() => {
   return (
     <nav className={'headerNav ' + classes.VTabsSection}>
       {appState.tabs.map((t) => (
-        <VTabButton aType={t} isActive={appState.currentTab === t}>
+        <VTabButton key={t} aType={t} isActive={appState.currentTab === t}>
           {t}
         </VTabButton>
       ))}

@@ -2,8 +2,8 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import App from './App'
 
-test('renders learn react link', () => {
+test('renders header icon', () => {
   render(<App />)
-  const linkElement = screen.getByRole('img')
-  expect(linkElement).toBeInTheDocument()
+  const imgElement = screen.getByAltText('dragon icon')
+  expect(imgElement).toBeInTheDocument()
 })
