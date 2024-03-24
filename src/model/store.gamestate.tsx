@@ -1,12 +1,7 @@
 import React, { ReactNode, useEffect } from 'react'
 import { action, makeAutoObservable, observable } from 'mobx'
 import { actList, actListApply, oList } from './m_data'
-import loadMetaData, {
-  ACTION_REST,
-  PLACE_VILLAGE,
-  STAT_AGE,
-  STAT_AGE_REBORN,
-} from './m_init'
+import loadMetaData, { STAT_AGE, STAT_AGE_REBORN } from './m_init'
 import CPlace from './m_place'
 import CObj from './m_obj'
 import { objActionReducer, ObjActionTypes } from './store.reducer'
@@ -113,7 +108,7 @@ export class GameState {
 
   startLoading() {
     globalAppState.setAppState(AppStates.APP_LOADING)
-    const promLoadMeta = new Promise((resolve) => {
+    new Promise((resolve) => {
       setTimeout(() => {
         loadMetaData()
         resolve(true)

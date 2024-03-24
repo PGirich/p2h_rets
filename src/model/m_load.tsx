@@ -1,11 +1,9 @@
-import { useEffect } from 'react'
-import { globalGameState } from './store.gamestate'
-
 export default function loadSavedData() {
   console.log('Start saved data loading...')
-  const savedData = localStorage.getItem('savedData')
-  if (savedData) {
-    JSON.parse(savedData)
+  const rawSavedData = localStorage.getItem('savedData')
+  if (rawSavedData) {
+    const savedData = JSON.parse(rawSavedData)
+    console.log(savedData)
     console.log('Saved data loaded successfully.')
     return true
   }

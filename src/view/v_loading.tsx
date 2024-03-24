@@ -1,4 +1,4 @@
-import { EventHandler, MouseEventHandler, ReactElement, useEffect } from 'react'
+import {  MouseEventHandler, ReactElement } from 'react'
 import classes from './v_loading.module.css'
 import { observer } from 'mobx-react-lite'
 import { AppStates, useAppState } from '../model/store.appstate'

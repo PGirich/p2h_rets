@@ -7,7 +7,6 @@ import COutfit from './m_outfit'
 import { OutfitType } from './m_effect'
 import { globalGameState } from './store.gamestate'
 import { oList } from './m_data'
-import { wait } from '@testing-library/user-event/dist/utils'
 
 //////////////////////////////////////
 

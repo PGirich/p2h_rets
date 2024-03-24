@@ -1,4 +1,3 @@
-import React from 'react'
 import classes from './v_progress.module.css'
 
 export default function VProgress(props: {
