@@ -1,16 +1,18 @@
 import { MouseEventHandler, ReactElement } from 'react'
 import classes from './v_shedule.module.css'
 import VProgress from './v_progress'
-import { actList } from '../model/m_data'
 import { useGameState } from '../model/store.gamestate'
 import { observer } from 'mobx-react-lite'
+import { ObjActionTypes } from '../model/store.reducer'
 
 export const VShedule: () => ReactElement = observer(() => {
   const gameState = useGameState()
 
   const btRestClickHandler: MouseEventHandler = (e) => {
-    gameState.currentRestAction.begin()
-    gameState.shedule = actList
+    gameState.actionDispatch(
+      ObjActionTypes.ACTION_PERFORM,
+      gameState.currentRestAction
+    )
   }
 
   return (
@@ -39,8 +41,7 @@ export const VShedule: () => ReactElement = observer(() => {
             <button
               className={classes.VSheduleEntryBtn}
               onClick={() => {
-                act.end()
-                gameState.shedule = actList
+                gameState.actionDispatch(ObjActionTypes.ACTION_STOP, act)
               }}
             >
               stop
@@ -48,8 +49,7 @@ export const VShedule: () => ReactElement = observer(() => {
             <button
               className={classes.VSheduleEntryBtn}
               onClick={() => {
-                act.up()
-                gameState.shedule = actList
+                gameState.actionDispatch(ObjActionTypes.ACTION_SHEDULE_UP, act)
               }}
             >
               up
@@ -57,8 +57,10 @@ export const VShedule: () => ReactElement = observer(() => {
             <button
               className={classes.VSheduleEntryBtn}
               onClick={() => {
-                act.down()
-                gameState.shedule = actList
+                gameState.actionDispatch(
+                  ObjActionTypes.ACTION_SHEDULE_DOWN,
+                  act
+                )
               }}
             >
               down

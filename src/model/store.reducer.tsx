@@ -10,6 +10,9 @@ import { actList } from './m_data'
 export const enum ObjActionTypes {
   ACTION_TRAVEL = 'travel',
   ACTION_PERFORM = 'perform',
+  ACTION_STOP = 'stop',
+  ACTION_SHEDULE_UP = 'shedule_up',
+  ACTION_SHEDULE_DOWN = 'shedule_down',
   ACTION_BUY = 'buy',
   ACTION_SELL = 'sell',
   ACTION_UNLOCK = 'unlock',
@@ -27,7 +30,19 @@ export const objActionReducer = (action: ObjActionTypes, obj: CObj) => {
       break
     case ObjActionTypes.ACTION_PERFORM:
       res = (obj as unknown as CAction).begin()
-      state.shedule = actList
+      state.setShedule(actList)
+      break
+    case ObjActionTypes.ACTION_STOP:
+      res = (obj as unknown as CAction).end()
+      state.setShedule(actList)
+      break
+    case ObjActionTypes.ACTION_SHEDULE_UP:
+      res = (obj as unknown as CAction).up()
+      state.setShedule(actList)
+      break
+    case ObjActionTypes.ACTION_SHEDULE_DOWN:
+      res = (obj as unknown as CAction).down()
+      state.setShedule(actList)
       break
     case ObjActionTypes.ACTION_BUY:
       res = obj.buy(state.currentPlace.name)

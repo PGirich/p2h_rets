@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect } from 'react'
 import { action, makeAutoObservable, observable } from 'mobx'
 import { actList, actListApply, oList } from './m_data'
-import loadMetaData, { STAT_AGE, STAT_AGE_REBORN } from './m_init'
+import loadMetaData, { GAME_TIC_MS, STAT_AGE, STAT_AGE_REBORN } from './m_init'
 import CPlace from './m_place'
 import CObj from './m_obj'
 import { objActionReducer, ObjActionTypes } from './store.reducer'
@@ -12,6 +12,7 @@ import { AppStates, globalAppState } from './store.appstate'
 import CStat from './m_stat'
 import loadSavedData from './m_load'
 import initNewGame from './m_newgame'
+import { injectStores } from '@mobx-devtools/tools'
 
 // type definition
 // типы логируемых данных
@@ -48,15 +49,21 @@ export class GameState {
       currentTime: observable,
       actionDispatch: observable,
       currentPlace: observable,
-      setCurrentPlace: action,
       log: observable,
-      toLog: action,
       outfit: observable,
       shedule: observable,
       sheduleFocus: observable,
       currentRestAction: observable,
       sheduleMaxTasks: observable,
       currentAge: observable,
+      setCurrentPlace: action,
+      setOutfit: action,
+      setShedule: action,
+      setSheduleFocus: action,
+      setCurrentRestAction: action,
+      setSheduleMaxTasks: action,
+      setCurrentAge: action,
+      toLog: action,
     })
     this.actionDispatch = (action: ObjActionTypes, obj: CObj) => false
     this.currentTime = Date.now()
@@ -125,6 +132,7 @@ export class GameState {
 }
 
 export const globalGameState = new GameState()
+injectStores({globalGameState});
 
 // создаем контекст
 const GameStateContext = React.createContext<GameState>({} as GameState)
@@ -140,11 +148,12 @@ export default function GameStateProvider(props: { children: ReactNode }) {
     const processTimer = setInterval(() => {
       if (globalAppState.state === AppStates.APP_ACTIVE) {
         actListApply() // работаем по расписанию
-        globalGameState.shedule = actList
+        globalGameState.setShedule(actList)
         ;(oList.get(STAT_AGE) as unknown as CStat).count =
-          ++globalGameState.currentAge // время идет
+          globalGameState.currentAge
+        globalGameState.setCurrentAge(globalGameState.currentAge + 1) // время идет
       }
-    }, 1000)
+    }, GAME_TIC_MS)
     return () => clearInterval(processTimer)
   })
 

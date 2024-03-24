@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react'
 import { makeAutoObservable } from 'mobx'
 import { ObjActionTypes } from './store.reducer'
+import { injectStores } from '@mobx-devtools/tools'
 
 // type definition
 export const enum AppStates {
-  APP_STARTING = 'starting', // waiting for start options 
+  APP_STARTING = 'starting', // waiting for start options
   APP_LOADING = 'loading', // loading metadata, saved data
   APP_WAITING = 'waiting', // waiting for begin game
   APP_PAUSE = 'on pause', // service screen
@@ -13,7 +14,7 @@ export const enum AppStates {
 
 // data model
 export class AppState {
-  version: string 
+  version: string
   state: AppStates // game state
   isObjHidingMode: boolean // hiding controls mode
   currentTab: ObjActionTypes // current tab
@@ -39,7 +40,8 @@ export class AppState {
   }
 }
 
-export const globalAppState : AppState = new AppState() //- плохо для юнит тестирования?
+export const globalAppState: AppState = new AppState() //- плохо для юнит тестирования?
+injectStores({ globalAppState })
 
 // создаем контекст
 const AppStateContext = React.createContext<AppState>({} as AppState)

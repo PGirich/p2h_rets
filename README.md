@@ -5,6 +5,7 @@ npm install eslint --global
 npm i mobx-react-lite
 npm i mobx
 npm install --save-dev @babel/plugin-proposal-private-property-in-object
+npm i @mobx-devtools/tools
 
 ====================================
 # Getting Started with Create React App

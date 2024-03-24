@@ -9,7 +9,7 @@ import { globalGameState } from './store.gamestate'
 import { oList } from './m_data'
 
 //////////////////////////////////////
-
+export const GAME_TIC_MS = 10000
 export const ACTION_LIVE = 'action_live'
 export const PLACE_VILLAGE = 'place_village'
 export const ACTION_REST = 'action_rest'
