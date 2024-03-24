@@ -45,13 +45,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           path: build
-          name: build-files
+          name: github-pages
 
   deploy:
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
 
     # Deploy to the github-pages environment
     environment:
@@ -65,4 +65,4 @@ jobs:
       - run: echo "Event ${{ github.event_name }}; Runner ${{ runner.os }}; Branch ${{ github.ref }}; Repository ${{ github.repository }}."
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 
+        uses: actions/deploy-pages@v4
