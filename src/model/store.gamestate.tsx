@@ -64,6 +64,7 @@ export class GameState {
       setSheduleMaxTasks: action,
       setCurrentAge: action,
       toLog: action,
+      clearLog: action,
     })
     this.actionDispatch = (action: ObjActionTypes, obj: CObj) => false
     this.currentTime = Date.now()
@@ -112,7 +113,8 @@ export class GameState {
       this.log.unshift({ type, str, obj, count: 1, when: Date.now() })
     }
   }
-
+  clearLog = () => {this.log=[]}
+ 
   startLoading() {
     globalAppState.setAppState(AppStates.APP_LOADING)
     new Promise((resolve) => {

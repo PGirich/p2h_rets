@@ -120,6 +120,7 @@ export default function loadMetaData() {
     OutfitType.OUTFIT_ROBE
   )
   mo.count = 1
+  mo.weight = 3
   mo.unlock()
 
   // ====================================================

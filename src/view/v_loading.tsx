@@ -1,4 +1,4 @@
-import {  MouseEventHandler, ReactElement } from 'react'
+import { MouseEventHandler, ReactElement } from 'react'
 import classes from './v_loading.module.css'
 import { observer } from 'mobx-react-lite'
 import { AppStates, useAppState } from '../model/store.appstate'
@@ -16,7 +16,9 @@ export const VLoading: () => ReactElement = observer(() => {
   }
   return (
     <div className={'wrapperС ' + classes.VLoading}>
+      <hr />
       <div className="main">Loading...</div>
+      <hr />
       {appState.state === AppStates.APP_STARTING && (
         <button className={classes.btnBegin} onClick={onClickHandlerSkip}>
           SKIP INTRO

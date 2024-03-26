@@ -4,8 +4,8 @@ import { AppStates, useAppState } from '../model/store.appstate'
 import { observer } from 'mobx-react-lite'
 import { ObjActionTypes } from '../model/store.reducer'
 import { VObjList } from './v_objlist'
-import { VOutfit } from './v_outfit'
 import { VLoading } from './v_loading'
+import { VOutfitList } from './v_outfitlist'
 
 export const VActiveTab: () => ReactElement = observer(() => {
   const appState = useAppState()
@@ -15,7 +15,7 @@ export const VActiveTab: () => ReactElement = observer(() => {
   return (
     <main className={'wrapperС ' + classes.VActiveTab}>
       <>
-        {appState.currentTab === ObjActionTypes.ACTION_EQUIP && <VOutfit />}
+        {appState.currentTab === ObjActionTypes.ACTION_EQUIP && <VOutfitList />}
         <VObjList />
       </>
     </main>

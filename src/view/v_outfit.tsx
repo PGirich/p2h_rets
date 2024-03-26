@@ -1,19 +1,35 @@
 import classes from './v_outfit.module.css'
-import { outfitSlotTypes } from '../model/m_effect'
+import { outfitSlotTypes, OutfitType } from '../model/m_effect'
 import { useGameState } from '../model/store.gamestate'
-import { ReactElement } from 'react'
-import { observer } from 'mobx-react-lite'
+import COutfit from '../model/m_outfit'
 
-export const VOutfit: () => ReactElement = observer(() => {
+interface propsVOutift {
+  slotType: OutfitType
+  obj: COutfit | undefined
+}
+export const VOutfit: React.FC<propsVOutift> = (props) => {
   const gameState = useGameState()
+  const { slotType, obj } = props
   return (
     <div className={classes.VOutfit}>
-      {outfitSlotTypes.map((slotType, idx) => (
-        <div className={classes.VOutfitEntryBox} key={idx}>
-          {slotType}:{' '}
-          {gameState.outfit[idx] ? gameState.outfit[idx]!.caption : 'no item'}
-        </div>
-      ))}
+      {obj && (
+        <>
+          <h4>
+            {slotType}:<em>{obj.weight}</em>
+          </h4>
+          <div className={classes.VOutfitEmpty}>
+            <img src={obj.picture} className={classes.VOutfitImg} />
+          </div>
+          <h6>{obj.caption}</h6>
+        </>
+      )}
+      {!obj && (
+        <>
+          <h4>{slotType}:</h4>
+          <div className={classes.VOutfitEmpty}> </div>
+          <h5>{'No item'}</h5>
+        </>
+      )}
     </div>
   )
-})
+}

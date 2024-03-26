@@ -55,7 +55,7 @@ export const objActionReducer = (action: ObjActionTypes, obj: CObj) => {
       break
     case ObjActionTypes.ACTION_EQUIP:
       res = (obj as unknown as COutfit).equip()
-      state.outfit = outfitList
+      state.setOutfit(outfitList)
       break
     default:
       res = false
@@ -69,7 +69,5 @@ export const objActionReducer = (action: ObjActionTypes, obj: CObj) => {
       action,
       obj
     )
-  // if (aType === ObjActionTypes.ACTION_PERFORM) setShedule(actList)
-  // if (aType === ObjActionTypes.ACTION_EQUIP) setOutfit(outfitList)
   return res
 }

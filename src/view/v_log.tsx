@@ -86,6 +86,7 @@ export const VLog = observer(() => {
 
   // очистка логов
   const btClearClickHandler: MouseEventHandler = (e) => {
+    gameState.clearLog()
     gameState.toLog(LoggedEventTypes.LOGGED_ACTIONS, 'log cleared...')
   }
 
@@ -109,15 +110,15 @@ export const VLog = observer(() => {
         </VLogFilter>
       ))}
 
-      <div key={'log'}>
+      <h5 key={'log'}>
         Log at {new Date(gameState.currentTime).toLocaleString()}
-      </div>
+      </h5>
       {gameState.log
         .filter((le) => evTypesToHide.has(le.type))
         .map((le, idx) => (
-          <div key={idx} className={classes.VLogEntry}>
+          <h4 key={idx} className={classes.VLogEntry}>
             {logDataToStr(le)}
-          </div>
+          </h4>
         ))}
     </div>
   )
